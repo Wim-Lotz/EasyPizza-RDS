@@ -1,6 +1,6 @@
 ﻿namespace EasyPizza.Domain.Enums;
 
-public enum PizzaBaseSize
+public enum PizzaBaseSizes
 {
     Small = 0,
     Medium = 1,

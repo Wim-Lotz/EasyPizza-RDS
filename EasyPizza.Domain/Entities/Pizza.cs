@@ -4,8 +4,8 @@ public class Pizza
 {
     public Pizza()
     {
-        CreatedDate = DateTime.Now;
-        UpdatedDate = DateTime.Now;
+        CreatedDate = DateTime.UtcNow;
+        UpdatedDate = DateTime.UtcNow;
     }
 
     public required Guid Id { get; init; }
