@@ -16,5 +16,5 @@ public class Ingredient
     public decimal Price { get; init; }
     public DateTime CreatedDate { get; init; }
     public DateTime UpdatedDate { get; init; }
-    public  IList<PizzaIngredient> PizzaIngredients { get; init; } = new List<PizzaIngredient>();
+    public IList<PizzaIngredient> PizzaIngredients { get; init; } = new List<PizzaIngredient>();
 }

@@ -4,13 +4,14 @@ public class Pizza
 {
     public Pizza()
     {
+        Id = Guid.NewGuid();
         CreatedDate = DateTime.UtcNow;
         UpdatedDate = DateTime.UtcNow;
     }
 
-    public required Guid Id { get; init; }
-    public required DateTime CreatedDate { get; init; }
-    public required DateTime UpdatedDate { get; init; }
-    public required Guid PizzaBaseId { get; init; }
-    public required IList<PizzaIngredient> PizzaIngredients { get; init; } = new List<PizzaIngredient>();
+    public Guid Id { get; init; }
+    public DateTime CreatedDate { get; init; }
+    public DateTime UpdatedDate { get; init; }
+    public Guid PizzaBaseId { get; init; }
+    public IList<PizzaIngredient> PizzaIngredients { get; init; } = new List<PizzaIngredient>();
 }
