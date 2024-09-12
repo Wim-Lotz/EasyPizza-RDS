@@ -1,0 +1,30 @@
+﻿version: "3.9"
+
+services:
+  
+  # asp.net web application
+  webapp:
+    container_name: easypizza.api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      - ASPNETCORE_ENVIROMENT=Development
+    
+  # postgres db
+  db:
+    container_name: easypizza.db
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: easypizza
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: pizza
+    volumes:
+      - postgres_data:/var/lib/postresql/data
+      
+volumes:
+  postgres_data:
