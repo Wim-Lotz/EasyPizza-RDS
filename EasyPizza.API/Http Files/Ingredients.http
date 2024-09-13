@@ -1,0 +1,6 @@
+﻿@EasyPizza_API_HostAddress = http://localhost:5138
+
+GET {{EasyPizza_API_HostAddress}}/api/Ingredients/
+Accept: application/json
+
+###
