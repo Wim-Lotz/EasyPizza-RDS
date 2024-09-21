@@ -1,8 +1,9 @@
 using System.Reflection;
+using EasyPizza.Application;
 using EasyPizza.Application.Interfaces;
 using EasyPizza.Application.Queries;
-using EasyPizza.Infrastructure;
-using EasyPizza.Infrastructure.Services;
+// using EasyPizza.Infrastructure;
+// using EasyPizza.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,12 +13,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<EasyPizzaDbContext>();
-builder.Services.AddScoped<IEasyPizzaDbContext>(provider => provider.GetRequiredService<EasyPizzaDbContext>());
+builder.Services.AddApplicationServices();
 
-builder.Services.AddScoped<IIngredientService, IngredientService>();
+// builder.Services.AddDbContext<EasyPizzaDbContext>();
+// builder.Services.AddScoped<IEasyPizzaDbContext>(provider => provider.GetRequiredService<EasyPizzaDbContext>());
+//
+// builder.Services.AddScoped<IIngredientService, IngredientService>();
 
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<GetIngredientsQuery>());
+// builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<GetIngredientsQuery>());
 
 var app = builder.Build();
 
@@ -29,6 +32,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseAuthorization();
 app.MapControllers();
 
 app.Run();

@@ -1,3 +1,3 @@
 ﻿namespace EasyPizza.Application.Queries;
 
-public sealed record GetIngredientsQuery():IRequest<IList<GetIngredientsResponse>>;
+public sealed record GetIngredientsQuery():IRequest<IngredientsResponse>;

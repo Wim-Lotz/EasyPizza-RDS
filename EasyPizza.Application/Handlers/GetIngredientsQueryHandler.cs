@@ -1,6 +1,6 @@
 ﻿namespace EasyPizza.Application.Handlers;
 
-internal sealed class GetIngredientsQueryHandler : IRequestHandler<GetIngredientsQuery, IList<GetIngredientsResponse>>
+internal sealed class GetIngredientsQueryHandler : IRequestHandler<GetIngredientsQuery, IngredientsResponse>
 {
     private readonly IIngredientService _ingredientService;
 
@@ -8,7 +8,7 @@ internal sealed class GetIngredientsQueryHandler : IRequestHandler<GetIngredient
     {
         _ingredientService = ingredientService;
     }
-    public Task<IList<GetIngredientsResponse>> Handle(GetIngredientsQuery request, CancellationToken cancellationToken)
+    public Task<IngredientsResponse> Handle(GetIngredientsQuery request, CancellationToken cancellationToken)
     {
         return _ingredientService.GetIngredients();
     }

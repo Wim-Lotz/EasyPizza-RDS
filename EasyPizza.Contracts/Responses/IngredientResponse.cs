@@ -1,10 +1,8 @@
-﻿namespace EasyPizza.Domain.Entities;
+﻿namespace EasyPizza.Contracts.Responses;
 
-public class Ingredient
+public record IngredientResponse
 {
     public required Guid Id { get; init; }
     public required string Name { get; init; }
     public required decimal Price { get; init; }
-    
-    public IList<PizzaIngredient> PizzaIngredients { get; init; } = [];
 }

@@ -2,5 +2,5 @@
 
 public interface IIngredientService
 {
-    Task<IList<GetIngredientsResponse>> GetIngredients();
+    Task<IngredientsResponse> GetIngredients();
 }

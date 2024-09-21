@@ -1,6 +1,4 @@
-﻿using EasyPizza.Application.Responses;
-
-namespace EasyPizza.Infrastructure.Services;
+﻿namespace EasyPizza.Infrastructure.Services;
 
 public class IngredientService : IIngredientService
 {
@@ -11,8 +9,17 @@ public class IngredientService : IIngredientService
         _context = context;
     }
     
-    public async Task<IList<GetIngredientsResponse>> GetIngredients()
+    public async Task<IngredientsResponse> GetIngredients()
     {
-        return await _context.Ingredients.Select(i => new GetIngredientsResponse(i.Id, i.Name, i.Price)).ToListAsync();
+        //return await _context.Ingredients.Select(i => new IngredientsResponse{Id = i.Id, i.Name, i.Price}).ToListAsync();
+        var ingredients = await _context.Ingredients.ToListAsync();
+
+        var ingredientsResponse = new IngredientsResponse
+        {
+            Items = ingredients.Select(ingredient => 
+                new IngredientResponse { Id = ingredient.Id, Name = ingredient.Name, Price = ingredient.Price }
+            )
+        };
+        return ingredientsResponse;
     }
 }

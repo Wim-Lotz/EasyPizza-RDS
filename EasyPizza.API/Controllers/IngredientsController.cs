@@ -1,30 +1,100 @@
-﻿namespace EasyPizza.API.Controllers;
+﻿using EasyPizza.API.Mapping;
+using EasyPizza.Application.Repositories;
+using EasyPizza.Contracts.Requests;
+using EasyPizza.Contracts.Responses;
+using EasyPizza.Domain.Entities;
 
-[Route("api/[controller]")]
+namespace EasyPizza.API.Controllers;
+
 [ApiController]
 public class IngredientsController:ControllerBase
 {
-    private readonly IMediator _mediator;
+    // private readonly IMediator _mediator;
+    //
+    // public IngredientsController(IMediator mediator)
+    // {
+    //     _mediator = mediator;
+    // }
 
-    public IngredientsController(IMediator mediator)
+    private readonly IEasyPizzaRepository _easyPizzaRepository;
+
+    public IngredientsController(IEasyPizzaRepository easyPizzaRepository)
     {
-        _mediator = mediator;
+        _easyPizzaRepository = easyPizzaRepository;
     }
 
-    [HttpGet]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> Get()
+    [HttpPost(ApiEndpoints.Ingredients.Create)]
+    public async Task<IActionResult> Create([FromBody] CreateIngredientRequest request)
     {
-        try
+        var ingredient = request.MapToIngredient();
+
+        await _easyPizzaRepository.CreateIngredientAsync(ingredient);
+
+        var response = ingredient.MapToResponse();
+        return CreatedAtAction(nameof(Get), new { id = ingredient.Id }, response);
+    }
+
+    [HttpGet(ApiEndpoints.Ingredients.Get)]
+    public async Task<IActionResult> Get([FromRoute]Guid id)
+    {
+        var ingredient = await _easyPizzaRepository.GetIngredientByIdAsync(id);
+        if (ingredient is null)
         {
-            var result = await _mediator.Send(new GetIngredientsQuery());
-            return Ok(result);
+            return NotFound();
         }
-        catch (Exception e)
-        {
-            return StatusCode(500, e.Message);
-        } 
+        
+        return Ok(ingredient.MapToResponse());
     }
+
+    [HttpGet(ApiEndpoints.Ingredients.GetAll)]
+    public async Task<IActionResult> GetAll()
+    {
+        var ingredients = await _easyPizzaRepository.GetIngredientsAsync();
+        
+        return Ok(ingredients.MapToResponse());
+    }
+
+    [HttpPut(ApiEndpoints.Ingredients.Update)]
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateIngredientRequest request)
+    {
+        var ingredient = request.MapToIngredient(id);
+        
+        var updated = await _easyPizzaRepository.UpdateIngredientAsync(ingredient);
+
+        if (!updated)
+        {
+            return NotFound();
+        }
+        
+        return Ok(ingredient.MapToResponse());
+    }
+
+    [HttpDelete(ApiEndpoints.Ingredients.Delete)]
+    public async Task<IActionResult> Delete([FromRoute] Guid id)
+    {
+        var deleted = await _easyPizzaRepository.DeleteIngredientAsync(id);
+
+        if (!deleted)
+        {
+            return NotFound();
+        }
+        return Ok();
+    }
+
+    // [HttpGet]
+    // [ProducesResponseType(StatusCodes.Status200OK)]
+    // [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    // public async Task<IActionResult> Get()
+    // {
+    //     try
+    //     {
+    //         var result = await _mediator.Send(new GetIngredientsQuery());
+    //         return Ok(result);
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         return StatusCode(500, e.Message);
+    //     } 
+    // }
     
 }
