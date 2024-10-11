@@ -18,12 +18,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\EasyPizza.Application\EasyPizza.Application.csproj" />
       <ProjectReference Include="..\EasyPizza.Contracts\EasyPizza.Contracts.csproj" />
     </ItemGroup>

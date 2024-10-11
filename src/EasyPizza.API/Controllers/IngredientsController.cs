@@ -9,23 +9,26 @@ namespace EasyPizza.API.Controllers;
 [ApiController]
 public class IngredientsController:ControllerBase
 {
-    // private readonly IMediator _mediator;
-    //
-    // public IngredientsController(IMediator mediator)
-    // {
-    //     _mediator = mediator;
-    // }
+    private readonly IMediator _mediator;
+    
+    public IngredientsController(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
 
     private readonly IEasyPizzaRepository _easyPizzaRepository;
+    private readonly ILogger<IngredientsController> _logger;
 
-    public IngredientsController(IEasyPizzaRepository easyPizzaRepository)
+    public IngredientsController(IEasyPizzaRepository easyPizzaRepository, ILogger<IngredientsController> logger)
     {
         _easyPizzaRepository = easyPizzaRepository;
+        _logger = logger;
     }
 
     [HttpPost(ApiEndpoints.Ingredients.Create)]
     public async Task<IActionResult> Create([FromBody] CreateIngredientRequest request)
     {
+        _logger.LogError("shit happeend");
         var ingredient = request.MapToIngredient();
 
         await _easyPizzaRepository.CreateIngredientAsync(ingredient);

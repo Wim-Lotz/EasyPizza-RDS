@@ -15,5 +15,5 @@ use exceptions for validation (using exceptions as I am using mediatr so need th
 
 
 docker commands:
-docker build -f EasyPizza.API\Dockerfile -t easypizza.api .  
-docker run -p 8080:80 --name easypizza.api easypizza.api 
+docker build -t easypizza.api .
+docker run -p 8080:80 --name easy.api easy.api 
