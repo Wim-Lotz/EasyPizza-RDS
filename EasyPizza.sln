@@ -1,11 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7E7BD030-9546-44F2-B130-3E0B84C9F145}"
-	ProjectSection(SolutionItems) = preProject
-		src\.dockerignore = src\.dockerignore
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyPizza.API", "src\EasyPizza.API\EasyPizza.API.csproj", "{A88D752B-A060-41E6-A26C-DB74D3AD0F22}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyPizza.Application", "src\EasyPizza.Application\EasyPizza.Application.csproj", "{A75B5F29-F499-46EF-BFBA-CEF67C55E90F}"
 EndProject
@@ -17,16 +12,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyPizza.Infrastructure", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Api", "src\Identity.Api\Identity.Api.csproj", "{E86C6B75-1140-477B-9BEC-DF116E10DC9C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyPizza.Api", "src\EasyPizza.Api\EasyPizza.Api.csproj", "{5440E16A-3E72-4A1F-A7DF-6327601D0B55}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A88D752B-A060-41E6-A26C-DB74D3AD0F22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A88D752B-A060-41E6-A26C-DB74D3AD0F22}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A88D752B-A060-41E6-A26C-DB74D3AD0F22}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A88D752B-A060-41E6-A26C-DB74D3AD0F22}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A75B5F29-F499-46EF-BFBA-CEF67C55E90F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A75B5F29-F499-46EF-BFBA-CEF67C55E90F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A75B5F29-F499-46EF-BFBA-CEF67C55E90F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -47,13 +40,17 @@ Global
 		{E86C6B75-1140-477B-9BEC-DF116E10DC9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E86C6B75-1140-477B-9BEC-DF116E10DC9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E86C6B75-1140-477B-9BEC-DF116E10DC9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5440E16A-3E72-4A1F-A7DF-6327601D0B55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5440E16A-3E72-4A1F-A7DF-6327601D0B55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5440E16A-3E72-4A1F-A7DF-6327601D0B55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5440E16A-3E72-4A1F-A7DF-6327601D0B55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{A88D752B-A060-41E6-A26C-DB74D3AD0F22} = {7E7BD030-9546-44F2-B130-3E0B84C9F145}
 		{A75B5F29-F499-46EF-BFBA-CEF67C55E90F} = {7E7BD030-9546-44F2-B130-3E0B84C9F145}
 		{A1EB4BE3-3CEC-430B-8B88-71CEB6C4CADA} = {7E7BD030-9546-44F2-B130-3E0B84C9F145}
 		{957755DB-BF8D-4FB6-A931-E384EFD33FCA} = {7E7BD030-9546-44F2-B130-3E0B84C9F145}
 		{F1BEF8DF-4025-420F-9192-D65A2B37EB79} = {7E7BD030-9546-44F2-B130-3E0B84C9F145}
 		{E86C6B75-1140-477B-9BEC-DF116E10DC9C} = {7E7BD030-9546-44F2-B130-3E0B84C9F145}
+		{5440E16A-3E72-4A1F-A7DF-6327601D0B55} = {7E7BD030-9546-44F2-B130-3E0B84C9F145}
 	EndGlobalSection
 EndGlobal

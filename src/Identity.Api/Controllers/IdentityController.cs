@@ -47,8 +47,8 @@ public class IdentityController : ControllerBase
         {
             Subject = new ClaimsIdentity(claims),
             Expires = DateTime.UtcNow.Add(TokenLifetime),
-            Issuer = "https://id.wim.com",
-            Audience = "https://todos.wim.com",
+            Issuer = "https://easypizza.id.com",
+            Audience = "https://easypizza.com",
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };
         
