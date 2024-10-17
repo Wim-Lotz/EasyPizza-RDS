@@ -20,6 +20,11 @@
     <ItemGroup>
       <ProjectReference Include="..\EasyPizza.Application\EasyPizza.Application.csproj" />
       <ProjectReference Include="..\EasyPizza.Contracts\EasyPizza.Contracts.csproj" />
+      <ProjectReference Include="..\EasyPizza.Infrastructure\EasyPizza.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Mapping\" />
     </ItemGroup>
 
 </Project>
