@@ -24,6 +24,7 @@
       POSTGRES_DB: easypizza
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: pizza
+      
     volumes:
       - postgres_data:/var/lib/postresql/data
         
