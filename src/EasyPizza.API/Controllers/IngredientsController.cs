@@ -1,4 +1,7 @@
-﻿namespace EasyPizza.API.Controllers;
+﻿using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+
+namespace EasyPizza.API.Controllers;
 
 [ApiController]
 public class IngredientsController : ControllerBase

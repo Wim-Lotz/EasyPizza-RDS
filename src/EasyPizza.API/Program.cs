@@ -1,9 +1,10 @@
-using System.Reflection;
 using EasyPizza.Application;
 using EasyPizza.Application.Interfaces;
-using EasyPizza.Application.Queries;
 using EasyPizza.Infrastructure;
 using EasyPizza.Infrastructure.Services;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
