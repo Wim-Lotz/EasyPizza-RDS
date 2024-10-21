@@ -1,5 +1,15 @@
 ﻿@EasyPizza_API_HostAddress = https://localhost:7182
 
+### Create Ingredient
+
+POST {{EasyPizza_API_HostAddress}}/api/Ingredients
+Content-Type: application/json
+
+{
+  "name": "cheese",
+  "price": 1.23
+}
+
 ### Get All Ingredients
 
 GET {{EasyPizza_API_HostAddress}}/api/Ingredients
@@ -9,16 +19,6 @@ Accept: application/json
 
 GET {{EasyPizza_API_HostAddress}}/api/Ingredients/2aa7e3ee-ce67-4ab8-8e67-6fcc0fc4dd98
 Accept: application/json
-
-### Create Ingredient
-
-POST {{EasyPizza_API_HostAddress}}/api/Ingredients
-Content-Type: application/json
-
-{
-    "name": "cheese",
-    "price": 1.23
-}
 
 ### Update Ingredient
 

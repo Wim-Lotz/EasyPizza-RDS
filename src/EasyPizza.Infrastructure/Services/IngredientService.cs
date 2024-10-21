@@ -24,4 +24,16 @@ public class IngredientService : IIngredientService
         //     return ingredientsResponse;
         throw new NotImplementedException();
     }
+
+    public async Task CreateIngredient(Ingredient ingredient, CancellationToken cancellationToken)
+    {
+        await _context.Ingredients.AddAsync(ingredient, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
+    }
+    
+    public bool DoesIngredientExist(string name, CancellationToken cancellationToken)
+    {
+        return _context.Ingredients.Any(i => i.Name.ToLower() == name.ToLower());
+    }
+
 }

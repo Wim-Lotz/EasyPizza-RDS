@@ -1,4 +1,5 @@
 using EasyPizza.Application;
+using EasyPizza.Application.Commands;
 using EasyPizza.Application.Interfaces;
 using EasyPizza.Infrastructure;
 using EasyPizza.Infrastructure.Services;
@@ -15,13 +16,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddApplicationServices();
-
-builder.Services.AddDbContext<EasyPizzaDbContext>();
-builder.Services.AddScoped<IEasyPizzaDbContext>(provider => provider.GetRequiredService<EasyPizzaDbContext>());
-
-builder.Services.AddScoped<IIngredientService, IngredientService>();
-
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<GetIngredientsQuery>());
+builder.Services.AddInfrastructureServices();
 
 var app = builder.Build();
 
@@ -34,6 +29,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
+app.UseMiddleware<ValidationMappingMiddleware>();
 app.MapControllers();
 
 app.Run();

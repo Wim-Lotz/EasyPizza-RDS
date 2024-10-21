@@ -10,19 +10,19 @@ public class IngredientConfig
             new Ingredient
             {
                 Id = Guid.NewGuid(),
-                Name = "Cheese",
+                Name = "cheese",
                 Price = 1.25M
             },
             new Ingredient
             {
                 Id = Guid.NewGuid(),
-                Name = "Salami",
+                Name = "salami",
                 Price = 2.0M
             },
             new Ingredient
             {
                 Id = Guid.NewGuid(),
-                Name = "Green Pepper",
+                Name = "green pepper",
                 Price = 0.25M
             });
     }
