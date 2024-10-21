@@ -55,4 +55,16 @@ public class IngredientsController : ControllerBase
         var response = ingredient.MapToResponse();
         return Ok(response);
     }
+
+    [HttpDelete(ApiEndpoints.Ingredients.Delete)]
+    public async Task<IActionResult> Delete([FromRoute] Guid id, CancellationToken token)
+    {
+        var success = await _mediator.Send(new DeleteIngredientCommand(id), token);
+        if (!success)
+        {
+            return NotFound();
+        }
+
+        return Ok();
+    }
 }
