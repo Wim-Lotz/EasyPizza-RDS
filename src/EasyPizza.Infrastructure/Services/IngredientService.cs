@@ -36,6 +36,13 @@ public class IngredientService : IIngredientService
         return result > 0;
     }
 
+    public async Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        var result = await _context.Ingredients.Where(i => i.Id == id).ExecuteDeleteAsync(cancellationToken);
+        
+        return result > 0;
+    }
+
     public async Task<bool> DoesIngredientExistAsync(string name, CancellationToken cancellationToken = default)
     {
         return await _context.Ingredients.AnyAsync(i => i.Name.ToLower() == name.ToLower(), cancellationToken);

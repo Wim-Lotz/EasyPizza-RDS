@@ -10,27 +10,29 @@ Content-Type: application/json
   "price": 1.23
 }
 
+### Get Ingredient By Id
+
+GET {{EasyPizza_API_HostAddress}}/api/Ingredients/15f843f9-bfc0-4bd9-940c-2ec7913865e3
+Accept: application/json
+
 ### Get All Ingredients
 
 GET {{EasyPizza_API_HostAddress}}/api/Ingredients
 Accept: application/json
 
-### Get Ingredient By Id
-
-GET {{EasyPizza_API_HostAddress}}/api/Ingredients/2aa7e3ee-ce67-4ab8-8e67-6fcc0fc4dd98
-Accept: application/json
-
 ### Update Ingredient
 
-PUT {{EasyPizza_API_HostAddress}}/api/Ingredients/abcdb527-48f3-4443-a626-661139630e01
+PUT {{EasyPizza_API_HostAddress}}/api/Ingredients/7f013999-fae4-432d-85df-8fdfc184bdee
 Content-Type: application/json
 
 {
-  "name": "green pepper",
-  "price": 0.30
+  "name": "brown pepper",
+  "price": 0.30,
+  "deleted": false
 }
 
 ### Delete Ingredient
 
-DELETE {{EasyPizza_API_HostAddress}}/api/Ingredients/6c4257c2-2964-4782-ac08-9c8619fbaae1
+DELETE {{EasyPizza_API_HostAddress}}/api/Ingredients/7f013999-fae4-432d-85df-8fdfc184bdee
 Content-Type: application/json
+
