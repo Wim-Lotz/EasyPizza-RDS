@@ -8,7 +8,7 @@ public static class ApplicationServiceCollectionExtensions
         {
             options.RegisterServicesFromAssembly(typeof(ApplicationServiceCollectionExtensions).Assembly);
         });
-        
+        services.AddValidatorsFromAssemblyContaining<IApplicationMarker>(ServiceLifetime.Scoped);
         return services;
     }
 }

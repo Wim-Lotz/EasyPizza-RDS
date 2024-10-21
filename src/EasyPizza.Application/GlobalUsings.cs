@@ -8,4 +8,3 @@ global using EasyPizza.Application.Commands;
 global using FluentValidation;
 global using EasyPizza.Application.Commands;
 global using EasyPizza.Application.Validators;
-

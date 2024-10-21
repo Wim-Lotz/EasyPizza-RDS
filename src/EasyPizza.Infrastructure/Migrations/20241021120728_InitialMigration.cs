@@ -131,9 +131,9 @@ namespace EasyPizza.Infrastructure.Migrations
                 columns: new[] { "Id", "Deleted", "Name", "Price" },
                 values: new object[,]
                 {
-                    { new Guid("709b2471-832b-47e1-aaa4-0654bb521244"), false, "Green Pepper", 0.25m },
-                    { new Guid("9f103837-663d-4bbf-a3e3-2757bed3a4d0"), false, "Salami", 2.0m },
-                    { new Guid("ed93beca-7bbd-4012-a059-b54c581475af"), false, "Cheese", 1.25m }
+                    { new Guid("15f843f9-bfc0-4bd9-940c-2ec7913865e3"), false, "cheese", 1.25m },
+                    { new Guid("46b1bd83-2380-4502-aa7e-b2b39627ed92"), false, "salami", 2.0m },
+                    { new Guid("ca9ef119-9023-4b48-b373-35898649df14"), false, "green pepper", 0.25m }
                 });
 
             migrationBuilder.InsertData(
@@ -141,12 +141,12 @@ namespace EasyPizza.Infrastructure.Migrations
                 columns: new[] { "Id", "Deleted", "PizzaBaseSize", "PizzaBaseType", "Price" },
                 values: new object[,]
                 {
-                    { new Guid("18a10a5e-a74a-4d3c-9a97-f93758edc13d"), false, "Small", "Thin", 1.0m },
-                    { new Guid("497b259e-a129-4869-a80c-4139621eb5a8"), false, "Large", "GlutenFree", 1.5m },
-                    { new Guid("5e4f389a-b58e-416a-ac4e-17738835d1a6"), false, "Medium", "Thin", 1.2m },
-                    { new Guid("695aebd2-e1e6-488a-a569-08e102380755"), false, "Large", "Thin", 1.5m },
-                    { new Guid("8a9ecec1-947f-451a-ac9c-94cc57fd1070"), false, "Medium", "GlutenFree", 1.2m },
-                    { new Guid("f20ced20-1c6f-47e0-903f-506c2b74ace0"), false, "Small", "GlutenFree", 1.0m }
+                    { new Guid("1fd65f37-4ac3-4dde-b4ee-49d8982a2c1f"), false, "Large", "Thin", 1.5m },
+                    { new Guid("3316034d-4de4-48cc-9233-3bf598d72312"), false, "Small", "GlutenFree", 1.0m },
+                    { new Guid("37c8f9e3-e8bb-4784-a2f0-87d67e33741b"), false, "Small", "Thin", 1.0m },
+                    { new Guid("550d30a5-2c15-4d65-a67b-bc0e65e0002b"), false, "Medium", "Thin", 1.2m },
+                    { new Guid("76524320-6da8-4587-af72-536c22114b04"), false, "Large", "GlutenFree", 1.5m },
+                    { new Guid("c51ca639-400f-488f-a80b-eaba1bd1184c"), false, "Medium", "GlutenFree", 1.2m }
                 });
 
             migrationBuilder.CreateIndex(

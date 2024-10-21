@@ -7,6 +7,6 @@ public class CreateIngredientCommandValidator : AbstractValidator<CreateIngredie
         RuleFor(command => command.Ingredient.Name).NotNull().NotEmpty();
         RuleFor(command => command.Ingredient.Price).NotEqual(0);
         RuleFor(i => i.Ingredient.Name).Must((i, name) => 
-            !service.DoesIngredientExist(name)).WithMessage("Ingredient already exits");
+            !service.DoesIngredientExistAsync(name).Result).WithMessage("Ingredient already exits");
     }
 }

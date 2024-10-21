@@ -3,17 +3,18 @@
 internal sealed class CreateIngredientCommandHandler : IRequestHandler<CreateIngredientCommand>
 {
     private readonly IIngredientService _ingredientService;
+    private readonly CreateIngredientCommandValidator _validator;
 
-    public CreateIngredientCommandHandler(IIngredientService ingredientService)
+    public CreateIngredientCommandHandler(IIngredientService ingredientService, CreateIngredientCommandValidator validator)
     {
         _ingredientService = ingredientService;
+        _validator = validator;
     }
 
     public async Task Handle(CreateIngredientCommand command, CancellationToken cancellationToken)
     {
-        var validator = new CreateIngredientCommandValidator(_ingredientService);
-        await validator.ValidateAndThrowAsync(command, cancellationToken);
+        await _validator.ValidateAndThrowAsync(command, cancellationToken);
 
-        await _ingredientService.CreateIngredient(command.Ingredient, cancellationToken);
+        await _ingredientService.CreateAsync(command.Ingredient, cancellationToken);
     }
 }

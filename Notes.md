@@ -25,6 +25,6 @@
 * Insomnia Api Tester Json Import
 
 #### Things I dont like
-using exceptions for validation (using exceptions as I am using mediatr so I need the thread return as I cant return to calling method)
+using exceptions for validation (using exceptions as I am using mediatr, so I need the thread return as I cant return to calling method)
 
 
