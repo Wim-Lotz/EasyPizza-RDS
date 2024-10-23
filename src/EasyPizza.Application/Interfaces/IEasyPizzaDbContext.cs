@@ -1,6 +1,4 @@
-﻿using EasyPizza.Domain.Entities;
-
-namespace EasyPizza.Application.Interfaces;
+﻿namespace EasyPizza.Application.Interfaces;
 
 public interface IEasyPizzaDbContext
 {

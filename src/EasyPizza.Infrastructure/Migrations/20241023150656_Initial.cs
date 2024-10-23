@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EasyPizza.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -46,7 +46,7 @@ namespace EasyPizza.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    PizzaBaseType = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     PizzaBaseSize = table.Column<string>(type: "text", nullable: false),
                     Price = table.Column<decimal>(type: "numeric", nullable: false),
                     Deleted = table.Column<bool>(type: "boolean", nullable: false)
@@ -62,7 +62,8 @@ namespace EasyPizza.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     PizzaBaseId = table.Column<Guid>(type: "uuid", nullable: false),
-                    PizzaBasePrice = table.Column<decimal>(type: "numeric", nullable: false)
+                    PizzaBasePrice = table.Column<decimal>(type: "numeric", nullable: false),
+                    PizzaBaseName = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -107,6 +108,7 @@ namespace EasyPizza.Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     IngredientPrice = table.Column<decimal>(type: "numeric", nullable: false),
                     IngredientId = table.Column<Guid>(type: "uuid", nullable: false),
+                    IngredientName = table.Column<string>(type: "text", nullable: false),
                     PizzaId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
@@ -131,22 +133,22 @@ namespace EasyPizza.Infrastructure.Migrations
                 columns: new[] { "Id", "Deleted", "Name", "Price" },
                 values: new object[,]
                 {
-                    { new Guid("15f843f9-bfc0-4bd9-940c-2ec7913865e3"), false, "cheese", 1.25m },
-                    { new Guid("46b1bd83-2380-4502-aa7e-b2b39627ed92"), false, "salami", 2.0m },
-                    { new Guid("ca9ef119-9023-4b48-b373-35898649df14"), false, "green pepper", 0.25m }
+                    { new Guid("759fb27c-5762-44b5-8637-1209f0178b23"), false, "cheese", 1.25m },
+                    { new Guid("e5182573-18c7-4f23-bbec-e9e486726f42"), false, "green pepper", 0.25m },
+                    { new Guid("f638c1af-f4da-4f24-9ac1-f62d79673751"), false, "salami", 2.0m }
                 });
 
             migrationBuilder.InsertData(
                 table: "PizzaBases",
-                columns: new[] { "Id", "Deleted", "PizzaBaseSize", "PizzaBaseType", "Price" },
+                columns: new[] { "Id", "Deleted", "Name", "PizzaBaseSize", "Price" },
                 values: new object[,]
                 {
-                    { new Guid("1fd65f37-4ac3-4dde-b4ee-49d8982a2c1f"), false, "Large", "Thin", 1.5m },
-                    { new Guid("3316034d-4de4-48cc-9233-3bf598d72312"), false, "Small", "GlutenFree", 1.0m },
-                    { new Guid("37c8f9e3-e8bb-4784-a2f0-87d67e33741b"), false, "Small", "Thin", 1.0m },
-                    { new Guid("550d30a5-2c15-4d65-a67b-bc0e65e0002b"), false, "Medium", "Thin", 1.2m },
-                    { new Guid("76524320-6da8-4587-af72-536c22114b04"), false, "Large", "GlutenFree", 1.5m },
-                    { new Guid("c51ca639-400f-488f-a80b-eaba1bd1184c"), false, "Medium", "GlutenFree", 1.2m }
+                    { new Guid("2aa670fa-5507-440d-ab0a-333eb765215a"), false, "thin crust", "Large", 1.5m },
+                    { new Guid("377f0f28-1b9b-407c-9e16-eb34bb6df709"), false, "gluten free", "Large", 1.5m },
+                    { new Guid("41196d7a-2bd5-4ca3-bcf1-a5ece88ea77d"), false, "thin crust", "Small", 1.0m },
+                    { new Guid("a2db5655-7f72-4900-9ae4-574abb8b66aa"), false, "gluten free", "Small", 1.0m },
+                    { new Guid("da008eda-05ee-4550-bc5a-4e00e55c7a18"), false, "gluten free", "Medium", 1.2m },
+                    { new Guid("eb42f67e-b03b-416d-b595-f85b6e900bfe"), false, "thin crust", "Medium", 1.2m }
                 });
 
             migrationBuilder.CreateIndex(

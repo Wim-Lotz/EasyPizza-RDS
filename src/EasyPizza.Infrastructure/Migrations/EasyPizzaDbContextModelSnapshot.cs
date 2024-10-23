@@ -46,21 +46,21 @@ namespace EasyPizza.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("15f843f9-bfc0-4bd9-940c-2ec7913865e3"),
+                            Id = new Guid("759fb27c-5762-44b5-8637-1209f0178b23"),
                             Deleted = false,
                             Name = "cheese",
                             Price = 1.25m
                         },
                         new
                         {
-                            Id = new Guid("46b1bd83-2380-4502-aa7e-b2b39627ed92"),
+                            Id = new Guid("f638c1af-f4da-4f24-9ac1-f62d79673751"),
                             Deleted = false,
                             Name = "salami",
                             Price = 2.0m
                         },
                         new
                         {
-                            Id = new Guid("ca9ef119-9023-4b48-b373-35898649df14"),
+                            Id = new Guid("e5182573-18c7-4f23-bbec-e9e486726f42"),
                             Deleted = false,
                             Name = "green pepper",
                             Price = 0.25m
@@ -117,6 +117,10 @@ namespace EasyPizza.Infrastructure.Migrations
                     b.Property<Guid>("PizzaBaseId")
                         .HasColumnType("uuid");
 
+                    b.Property<string>("PizzaBaseName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<decimal>("PizzaBasePrice")
                         .HasColumnType("numeric");
 
@@ -136,11 +140,12 @@ namespace EasyPizza.Infrastructure.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("PizzaBaseSize")
+                    b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
 
-                    b.Property<string>("PizzaBaseType")
+                    b.Property<string>("PizzaBaseSize")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -154,50 +159,50 @@ namespace EasyPizza.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3316034d-4de4-48cc-9233-3bf598d72312"),
+                            Id = new Guid("a2db5655-7f72-4900-9ae4-574abb8b66aa"),
                             Deleted = false,
+                            Name = "gluten free",
                             PizzaBaseSize = "Small",
-                            PizzaBaseType = "GlutenFree",
                             Price = 1.0m
                         },
                         new
                         {
-                            Id = new Guid("c51ca639-400f-488f-a80b-eaba1bd1184c"),
+                            Id = new Guid("da008eda-05ee-4550-bc5a-4e00e55c7a18"),
                             Deleted = false,
+                            Name = "gluten free",
                             PizzaBaseSize = "Medium",
-                            PizzaBaseType = "GlutenFree",
                             Price = 1.2m
                         },
                         new
                         {
-                            Id = new Guid("76524320-6da8-4587-af72-536c22114b04"),
+                            Id = new Guid("377f0f28-1b9b-407c-9e16-eb34bb6df709"),
                             Deleted = false,
+                            Name = "gluten free",
                             PizzaBaseSize = "Large",
-                            PizzaBaseType = "GlutenFree",
                             Price = 1.5m
                         },
                         new
                         {
-                            Id = new Guid("37c8f9e3-e8bb-4784-a2f0-87d67e33741b"),
+                            Id = new Guid("41196d7a-2bd5-4ca3-bcf1-a5ece88ea77d"),
                             Deleted = false,
+                            Name = "thin crust",
                             PizzaBaseSize = "Small",
-                            PizzaBaseType = "Thin",
                             Price = 1.0m
                         },
                         new
                         {
-                            Id = new Guid("550d30a5-2c15-4d65-a67b-bc0e65e0002b"),
+                            Id = new Guid("eb42f67e-b03b-416d-b595-f85b6e900bfe"),
                             Deleted = false,
+                            Name = "thin crust",
                             PizzaBaseSize = "Medium",
-                            PizzaBaseType = "Thin",
                             Price = 1.2m
                         },
                         new
                         {
-                            Id = new Guid("1fd65f37-4ac3-4dde-b4ee-49d8982a2c1f"),
+                            Id = new Guid("2aa670fa-5507-440d-ab0a-333eb765215a"),
                             Deleted = false,
+                            Name = "thin crust",
                             PizzaBaseSize = "Large",
-                            PizzaBaseType = "Thin",
                             Price = 1.5m
                         });
                 });
@@ -210,6 +215,10 @@ namespace EasyPizza.Infrastructure.Migrations
 
                     b.Property<Guid>("IngredientId")
                         .HasColumnType("uuid");
+
+                    b.Property<string>("IngredientName")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<decimal>("IngredientPrice")
                         .HasColumnType("numeric");

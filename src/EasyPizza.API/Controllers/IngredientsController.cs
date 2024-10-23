@@ -13,7 +13,7 @@ public class IngredientsController : ControllerBase
     }
 
     [HttpGet(ApiEndpoints.Ingredients.GetAll)]
-    public async Task<IActionResult> Get(CancellationToken token)
+    public async Task<IActionResult> GetAll(CancellationToken token)
     {
         var ingredients = await _mediator.Send(new GetIngredientsQuery(), token);
         var response = ingredients.MapToResponse();

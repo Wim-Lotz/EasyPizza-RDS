@@ -27,4 +27,21 @@ public static class ContractMapping
             Id = id, Name = request.Name.ToLower(), Price = request.Price, Deleted = request.Deleted
         };
     }
+    
+    public static PizzaBaseResponse MapToResponse(this PizzaBase pizzaBase)
+    {
+        return new PizzaBaseResponse
+        {
+            Id = pizzaBase.Id, 
+            Name = pizzaBase.Name, 
+            Price = pizzaBase.Price, 
+            Size = pizzaBase.PizzaBaseSize.ToString(),
+            Deleted = pizzaBase.Deleted
+        };
+    }
+
+    public static PizzaBasesResponse MapToResponse(this IEnumerable<PizzaBase> ingredients)
+    {
+        return new PizzaBasesResponse { Items = ingredients.Select(MapToResponse) };
+    }
 }

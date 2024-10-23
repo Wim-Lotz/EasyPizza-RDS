@@ -11,9 +11,9 @@ docker run --rm -p 8080:80 --name easy.api easypizza.api
 
 ## Entity Framework Migration Commands
 
-* dotnet ef migrations add <migration-name> --project EasyPizza.Infrastructure --startup-project EasyPizza.Api
-* dotnet ef database update --project EasyPizza.Infrastructure --startup-project EasyPizza.Api
-* dotnet ef migrations remove --project EasyPizza.Infrastructure --startup-project EasyPizza.Api
+* dotnet ef migrations add <migration-name> --project src/EasyPizza.Infrastructure --startup-project src/EasyPizza.Api
+* dotnet ef database update --project src/EasyPizza.Infrastructure --startup-project src/EasyPizza.Api
+* dotnet ef migrations remove --project src/EasyPizza.Infrastructure --startup-project src/EasyPizza.Api
 
 ### Rollback
 dotnet ef database update <previous-migration-name> --project EasyPizza.Infrastructure --startup-project EasyPizza.Api

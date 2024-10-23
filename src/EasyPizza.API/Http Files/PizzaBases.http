@@ -1,0 +1,11 @@
+@EasyPizza_API_HostAddress = https://localhost:7182
+
+### Get All
+
+GET {{EasyPizza_API_HostAddress}}/api/pizza-bases
+Accept: application/json
+
+### Get by Id
+
+GET {{EasyPizza_API_HostAddress}}/api/pizza-bases/377f0f28-1b9b-407c-9e16-eb34bb6df709
+Accept: application/json
