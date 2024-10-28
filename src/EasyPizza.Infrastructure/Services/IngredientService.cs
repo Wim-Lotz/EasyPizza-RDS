@@ -29,7 +29,6 @@ public class IngredientService : IIngredientService
     {
         var result = await _context.Ingredients.Where(i => i.Id == ingredient.Id)
             .ExecuteUpdateAsync(u => u
-                .SetProperty(n => n.Name, ingredient.Name)
                 .SetProperty(p => p.Price, ingredient.Price)
                 .SetProperty(c => c.Deleted, ingredient.Deleted), cancellationToken);
 
@@ -48,8 +47,10 @@ public class IngredientService : IIngredientService
         return await _context.Ingredients.AnyAsync(i => i.Name.ToLower() == name.ToLower(), cancellationToken);
     }
 
-    public async Task<bool> IsNameTakenAsync(string name, Guid id, CancellationToken cancellationToken = default)
+    public async Task<bool> IsNameTheSame(Guid id, string name, CancellationToken cancellationToken = default)
     {
-        return await _context.Ingredients.AnyAsync(i => i.Name.ToLower() == name.ToLower() && i.Id != id, cancellationToken);
+        var ingredient = await _context.Ingredients.FirstOrDefaultAsync(i => i.Id == id, cancellationToken);
+
+        return ingredient != null && ingredient.Name == name;
     }
 }

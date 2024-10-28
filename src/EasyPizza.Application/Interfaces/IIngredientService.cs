@@ -8,5 +8,5 @@ public interface IIngredientService
     Task<bool> UpdateAsync(Ingredient ingredient, CancellationToken cancellationToken = default);
     Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default);
     Task<bool> DoesIngredientExistAsync(string name, CancellationToken cancellationToken = default);
-    Task<bool> IsNameTakenAsync(string name, Guid id, CancellationToken cancellationToken = default);
+    Task<bool> IsNameTheSame(Guid id, string name, CancellationToken cancellationToken = default);
 }

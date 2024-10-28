@@ -1,3 +1,3 @@
 ﻿namespace EasyPizza.Application.Queries;
 
-public sealed record GetPizzaBaseQuery(Guid Id) : IRequest<PizzaBase>;
+public sealed record GetPizzaBaseQuery(Guid Id) : IRequest<PizzaBase?>;

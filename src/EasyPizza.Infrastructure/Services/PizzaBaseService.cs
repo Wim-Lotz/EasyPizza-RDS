@@ -21,16 +21,38 @@ public class PizzaBaseService : IPizzaBaseService
 
     public async Task CreateAsync(PizzaBase pizzaBase, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        await _context.PizzaBases.AddAsync(pizzaBase, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
     }
 
     public async Task<bool> UpdateAsync(PizzaBase pizzaBase, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        var result = await _context.PizzaBases.Where(i => i.Id == pizzaBase.Id)
+            .ExecuteUpdateAsync(u => u
+                .SetProperty(n => n.PizzaBaseSize, pizzaBase.PizzaBaseSize)
+                .SetProperty(p => p.Price, pizzaBase.Price)
+                .SetProperty(c => c.Deleted, pizzaBase.Deleted), cancellationToken);
+
+        return result > 0;
     }
 
     public async Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
+    }
+
+    public async Task<bool> DoesNameSizeComboExistAsync(PizzaBase pizzaBase, CancellationToken cancellationToken = default)
+    {
+        var result = await _context.PizzaBases.
+            FirstOrDefaultAsync(b => b.Name == pizzaBase.Name && b.PizzaBaseSize == pizzaBase.PizzaBaseSize, cancellationToken);
+        
+        return result != null;
+    }
+    
+    public async Task<bool> IsNameTheSame(Guid id, string name, CancellationToken cancellationToken = default)
+    {
+        var pizzaBase = await _context.PizzaBases.FirstOrDefaultAsync(i => i.Id == id, cancellationToken);
+
+        return pizzaBase != null && pizzaBase.Name == name;
     }
 }
