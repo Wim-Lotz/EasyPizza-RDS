@@ -1,6 +1,6 @@
 ﻿namespace EasyPizza.Application.Handlers;
 
-public class DeleteIngredientCommandHandler:IRequestHandler<DeleteIngredientCommand, bool>
+public sealed class DeleteIngredientCommandHandler : IRequestHandler<DeleteIngredientCommand, bool>
 {
     private readonly IIngredientService _ingredientService;
 
@@ -9,8 +9,8 @@ public class DeleteIngredientCommandHandler:IRequestHandler<DeleteIngredientComm
         _ingredientService = ingredientService;
     }
 
-    public Task<bool> Handle(DeleteIngredientCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeleteIngredientCommand request, CancellationToken cancellationToken)
     {
-        return _ingredientService.DeleteAsync(request.Id, cancellationToken);
+        return await _ingredientService.DeleteAsync(request.Id, cancellationToken);
     }
 }

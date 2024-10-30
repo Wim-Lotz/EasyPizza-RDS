@@ -33,20 +33,37 @@ public class PizzaBasesController : ControllerBase
     }
     
     [HttpPost(ApiEndpoints.PizzaBases.Create)]
-    public async Task<IActionResult> Create(CancellationToken cancellationToken)
+    public async Task<IActionResult> Create([FromBody] CreatePizzaBaseRequest request, CancellationToken cancellationToken)
     {
-        return Ok();
+        var pizzaBase = request.MapToBase();
+        if(pizzaBase is null)
+            return BadRequest();
+        await _mediator.Send(new CreatePizzaBaseCommand(pizzaBase), cancellationToken);
+        var response = pizzaBase.MapToResponse();
+        return CreatedAtAction(nameof(Get), new { id = response.Id }, response);
     }
     
     [HttpPut(ApiEndpoints.PizzaBases.Update)]
-    public async Task<IActionResult> Update(CancellationToken cancellationToken)
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdatePizzaBaseRequest request, CancellationToken cancellationToken)
     {
-        return Ok();
+        var pizzaBase = request.MapToBase(id);
+        if(pizzaBase is null)
+            return BadRequest();
+        var success = await _mediator.Send(new UpdatePizzaBaseCommand(pizzaBase), cancellationToken);
+        if(!success)
+            return NotFound();
+        var response = pizzaBase.MapToResponse();
+        return Ok(response);
     }
     
     [HttpDelete(ApiEndpoints.PizzaBases.Delete)]
-    public async Task<IActionResult> Delete(CancellationToken cancellationToken)
+    public async Task<IActionResult> Delete([FromRoute] Guid id, CancellationToken cancellationToken)
     {
+        var success = await _mediator.Send(new DeletePizzaBaseCommand(id), cancellationToken);
+        if (!success)
+        {
+            return NotFound();
+        }
         return Ok();
     }
 }

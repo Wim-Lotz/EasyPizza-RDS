@@ -37,7 +37,9 @@ public class IngredientService : IIngredientService
 
     public async Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        var result = await _context.Ingredients.Where(i => i.Id == id).ExecuteDeleteAsync(cancellationToken);
+        var result = await _context.Ingredients.Where(i => i.Id == id)
+            .ExecuteUpdateAsync(u => u
+                .SetProperty(p => p.Deleted, true), cancellationToken);
         
         return result > 0;
     }

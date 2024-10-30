@@ -38,7 +38,11 @@ public class PizzaBaseService : IPizzaBaseService
 
     public async Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        var result = await _context.PizzaBases.Where(i => i.Id == id)
+            .ExecuteUpdateAsync(u => u
+                .SetProperty(p => p.Deleted, true), cancellationToken);
+        
+        return result > 0;
     }
 
     public async Task<bool> DoesNameSizeComboExistAsync(PizzaBase pizzaBase, CancellationToken cancellationToken = default)
