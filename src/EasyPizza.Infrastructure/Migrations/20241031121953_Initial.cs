@@ -61,8 +61,8 @@ namespace EasyPizza.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    PizzaBaseId = table.Column<Guid>(type: "uuid", nullable: false),
-                    PizzaBasePrice = table.Column<decimal>(type: "numeric", nullable: false)
+                    PizzaBasePrice = table.Column<decimal>(type: "numeric", nullable: false),
+                    PizzaBaseId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -71,8 +71,7 @@ namespace EasyPizza.Infrastructure.Migrations
                         name: "FK_Pizzas_PizzaBases_PizzaBaseId",
                         column: x => x.PizzaBaseId,
                         principalTable: "PizzaBases",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -90,14 +89,12 @@ namespace EasyPizza.Infrastructure.Migrations
                         name: "FK_OrderLines_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_OrderLines_Pizzas_PizzaId",
                         column: x => x.PizzaId,
                         principalTable: "Pizzas",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -116,14 +113,12 @@ namespace EasyPizza.Infrastructure.Migrations
                         name: "FK_PizzaIngredients_Ingredients_IngredientId",
                         column: x => x.IngredientId,
                         principalTable: "Ingredients",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_PizzaIngredients_Pizzas_PizzaId",
                         column: x => x.PizzaId,
                         principalTable: "Pizzas",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.InsertData(
@@ -131,9 +126,9 @@ namespace EasyPizza.Infrastructure.Migrations
                 columns: new[] { "Id", "Deleted", "Name", "Price" },
                 values: new object[,]
                 {
-                    { new Guid("8820325b-cd46-40cb-b6a5-703636c9cdb2"), false, "salami", 2.0m },
-                    { new Guid("cc6d6add-2b12-4bd5-ab94-782b831e5934"), false, "cheese", 1.25m },
-                    { new Guid("d6c379ad-e523-444c-9e90-679833585d87"), false, "green pepper", 0.25m }
+                    { new Guid("16af5c15-3814-4590-a385-897ad7919556"), false, "cheese", 1.25m },
+                    { new Guid("76ad2763-e715-4125-8087-03be7eb00552"), false, "salami", 2.0m },
+                    { new Guid("b3165107-8c02-44ea-86f2-3c31bbe2be5d"), false, "green pepper", 0.25m }
                 });
 
             migrationBuilder.InsertData(
@@ -141,12 +136,12 @@ namespace EasyPizza.Infrastructure.Migrations
                 columns: new[] { "Id", "Deleted", "Name", "PizzaBaseSize", "Price" },
                 values: new object[,]
                 {
-                    { new Guid("0a9914bf-7c8b-4d05-87aa-76619cb7d1c9"), false, "thin crust", "Medium", 1.2m },
-                    { new Guid("18e09fc1-af69-4343-85ca-611572129e6a"), false, "gluten free", "Medium", 1.2m },
-                    { new Guid("904bde24-e737-4f22-b917-4b506a5b8c1f"), false, "thin crust", "Small", 1.0m },
-                    { new Guid("b965054c-2376-4aea-9c8c-53ada853f601"), false, "gluten free", "Small", 1.0m },
-                    { new Guid("c7385280-e068-4306-8b52-d00f7dae7aaf"), false, "thin crust", "Large", 1.5m },
-                    { new Guid("e0f84caf-b10a-46a7-a62b-564fbf641a6f"), false, "gluten free", "Large", 1.5m }
+                    { new Guid("0434c226-a2d5-4d2b-9d62-e969a7c62c08"), false, "thin crust", "Small", 1.0m },
+                    { new Guid("325f0ea3-ce42-4aec-b0a2-a5d3a43905dc"), false, "gluten free", "Medium", 1.2m },
+                    { new Guid("4fb86e90-3690-4060-b2dc-dcd0ae7d0ffd"), false, "thin crust", "Medium", 1.2m },
+                    { new Guid("83f1f205-4c01-4341-92fd-d5e17cf8a1ae"), false, "thin crust", "Large", 1.5m },
+                    { new Guid("e03ccc73-8aa5-4c6a-8783-9466e1362235"), false, "gluten free", "Small", 1.0m },
+                    { new Guid("e0d62c31-de37-4e82-a898-baca4980b593"), false, "gluten free", "Large", 1.5m }
                 });
 
             migrationBuilder.CreateIndex(
@@ -157,7 +152,8 @@ namespace EasyPizza.Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_OrderLines_PizzaId",
                 table: "OrderLines",
-                column: "PizzaId");
+                column: "PizzaId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_PizzaIngredients_IngredientId",

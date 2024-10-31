@@ -11,6 +11,12 @@ public class PizzaBaseConfig
         entityTypeBuilder.Property(p => p.Name).HasMaxLength(20);
         entityTypeBuilder.Property(p => p.PizzaBaseSize).HasConversion<string>();
 
+        entityTypeBuilder.HasMany(e => e.Pizzas)
+            .WithOne(e => e.PizzaBase)
+            .HasForeignKey(e => e.PizzaBaseId)
+            .OnDelete(DeleteBehavior.NoAction)
+            .IsRequired();
+        
         entityTypeBuilder.HasData(
             new PizzaBase
             {

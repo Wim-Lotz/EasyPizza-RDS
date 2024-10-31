@@ -18,3 +18,12 @@ docker run --rm -p 8080:80 --name easy.api easypizza.api
 ### Rollback
 dotnet ef database update <previous-migration-name> --project EasyPizza.Infrastructure --startup-project EasyPizza.Api
 
+
+### DB Full Join
+select * from "Orders"  
+inner join "OrderLines" on "Orders"."Id" = "OrderLines"."OrderId"  
+inner join "Pizzas" on "OrderLines"."PizzaId" = "Pizzas"."Id"  
+inner join "PizzaBases" on "Pizzas"."PizzaBaseId" = "PizzaBases"."Id"  
+inner join "PizzaIngredients" on "Pizzas"."Id" = "PizzaIngredients"."PizzaId"  
+inner join "Ingredients" on "PizzaIngredients"."IngredientId" = "Ingredients"."Id"  
+

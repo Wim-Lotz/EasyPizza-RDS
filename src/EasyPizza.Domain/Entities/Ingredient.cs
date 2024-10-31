@@ -6,6 +6,10 @@ public sealed class Ingredient
     public required string Name { get; init; }
     public required decimal Price { get; init; }
     public bool Deleted { get; init; }
+
+    #region Relationships
     
     public IList<PizzaIngredient> PizzaIngredients { get; init; } = [];
+
+    #endregion
 }

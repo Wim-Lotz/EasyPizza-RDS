@@ -46,21 +46,21 @@ namespace EasyPizza.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("cc6d6add-2b12-4bd5-ab94-782b831e5934"),
+                            Id = new Guid("16af5c15-3814-4590-a385-897ad7919556"),
                             Deleted = false,
                             Name = "cheese",
                             Price = 1.25m
                         },
                         new
                         {
-                            Id = new Guid("8820325b-cd46-40cb-b6a5-703636c9cdb2"),
+                            Id = new Guid("76ad2763-e715-4125-8087-03be7eb00552"),
                             Deleted = false,
                             Name = "salami",
                             Price = 2.0m
                         },
                         new
                         {
-                            Id = new Guid("d6c379ad-e523-444c-9e90-679833585d87"),
+                            Id = new Guid("b3165107-8c02-44ea-86f2-3c31bbe2be5d"),
                             Deleted = false,
                             Name = "green pepper",
                             Price = 0.25m
@@ -103,7 +103,8 @@ namespace EasyPizza.Infrastructure.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.HasIndex("PizzaId");
+                    b.HasIndex("PizzaId")
+                        .IsUnique();
 
                     b.ToTable("OrderLines");
                 });
@@ -155,7 +156,7 @@ namespace EasyPizza.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b965054c-2376-4aea-9c8c-53ada853f601"),
+                            Id = new Guid("e03ccc73-8aa5-4c6a-8783-9466e1362235"),
                             Deleted = false,
                             Name = "gluten free",
                             PizzaBaseSize = "Small",
@@ -163,7 +164,7 @@ namespace EasyPizza.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("18e09fc1-af69-4343-85ca-611572129e6a"),
+                            Id = new Guid("325f0ea3-ce42-4aec-b0a2-a5d3a43905dc"),
                             Deleted = false,
                             Name = "gluten free",
                             PizzaBaseSize = "Medium",
@@ -171,7 +172,7 @@ namespace EasyPizza.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e0f84caf-b10a-46a7-a62b-564fbf641a6f"),
+                            Id = new Guid("e0d62c31-de37-4e82-a898-baca4980b593"),
                             Deleted = false,
                             Name = "gluten free",
                             PizzaBaseSize = "Large",
@@ -179,7 +180,7 @@ namespace EasyPizza.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("904bde24-e737-4f22-b917-4b506a5b8c1f"),
+                            Id = new Guid("0434c226-a2d5-4d2b-9d62-e969a7c62c08"),
                             Deleted = false,
                             Name = "thin crust",
                             PizzaBaseSize = "Small",
@@ -187,7 +188,7 @@ namespace EasyPizza.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0a9914bf-7c8b-4d05-87aa-76619cb7d1c9"),
+                            Id = new Guid("4fb86e90-3690-4060-b2dc-dcd0ae7d0ffd"),
                             Deleted = false,
                             Name = "thin crust",
                             PizzaBaseSize = "Medium",
@@ -195,7 +196,7 @@ namespace EasyPizza.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c7385280-e068-4306-8b52-d00f7dae7aaf"),
+                            Id = new Guid("83f1f205-4c01-4341-92fd-d5e17cf8a1ae"),
                             Deleted = false,
                             Name = "thin crust",
                             PizzaBaseSize = "Large",
@@ -229,41 +230,51 @@ namespace EasyPizza.Infrastructure.Migrations
 
             modelBuilder.Entity("EasyPizza.Domain.Entities.OrderLine", b =>
                 {
-                    b.HasOne("EasyPizza.Domain.Entities.Order", null)
+                    b.HasOne("EasyPizza.Domain.Entities.Order", "Order")
                         .WithMany("OrderLines")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("EasyPizza.Domain.Entities.Pizza", null)
-                        .WithMany("OrderLines")
-                        .HasForeignKey("PizzaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("EasyPizza.Domain.Entities.Pizza", "Pizza")
+                        .WithOne("OrderLine")
+                        .HasForeignKey("EasyPizza.Domain.Entities.OrderLine", "PizzaId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Pizza");
                 });
 
             modelBuilder.Entity("EasyPizza.Domain.Entities.Pizza", b =>
                 {
-                    b.HasOne("EasyPizza.Domain.Entities.PizzaBase", null)
+                    b.HasOne("EasyPizza.Domain.Entities.PizzaBase", "PizzaBase")
                         .WithMany("Pizzas")
                         .HasForeignKey("PizzaBaseId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("PizzaBase");
                 });
 
             modelBuilder.Entity("EasyPizza.Domain.Entities.PizzaIngredient", b =>
                 {
-                    b.HasOne("EasyPizza.Domain.Entities.Ingredient", null)
+                    b.HasOne("EasyPizza.Domain.Entities.Ingredient", "Ingredient")
                         .WithMany("PizzaIngredients")
                         .HasForeignKey("IngredientId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("EasyPizza.Domain.Entities.Pizza", null)
+                    b.HasOne("EasyPizza.Domain.Entities.Pizza", "Pizza")
                         .WithMany("PizzaIngredients")
                         .HasForeignKey("PizzaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("Ingredient");
+
+                    b.Navigation("Pizza");
                 });
 
             modelBuilder.Entity("EasyPizza.Domain.Entities.Ingredient", b =>
@@ -278,7 +289,8 @@ namespace EasyPizza.Infrastructure.Migrations
 
             modelBuilder.Entity("EasyPizza.Domain.Entities.Pizza", b =>
                 {
-                    b.Navigation("OrderLines");
+                    b.Navigation("OrderLine")
+                        .IsRequired();
 
                     b.Navigation("PizzaIngredients");
                 });

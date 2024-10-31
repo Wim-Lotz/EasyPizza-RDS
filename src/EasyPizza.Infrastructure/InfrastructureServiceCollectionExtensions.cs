@@ -6,7 +6,7 @@ public static class InfrastructureServiceCollectionExtensions
     {
         services.AddScoped<IIngredientService, IngredientService>();
         services.AddScoped<IPizzaBaseService, PizzaBaseService>();
-        services.AddScoped<IPizzaOrderService, PizzaOrderService>();
+        services.AddScoped<IOrderService, OrderService>();
         services.AddDbContext<EasyPizzaDbContext>();
         services.AddScoped<IEasyPizzaDbContext>(provider => provider.GetRequiredService<EasyPizzaDbContext>());
 

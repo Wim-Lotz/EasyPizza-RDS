@@ -8,8 +8,11 @@ public sealed class PizzaBase
     public required string Name { get; init; }
     public required PizzaBaseSize PizzaBaseSize { get; init; }
     public required decimal Price { get; init; }
-
     public bool Deleted { get; init; }
+
+    #region Relationships
     
     public IList<Pizza> Pizzas { get; init; } = [];
+
+    #endregion
 }

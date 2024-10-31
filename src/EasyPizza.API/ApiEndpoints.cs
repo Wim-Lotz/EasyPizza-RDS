@@ -26,10 +26,11 @@ public static class ApiEndpoints
         public const string Delete = $"{Base}/{{id:guid}}";
     }
     
-    public static class PizzaOrders
+    public static class Orders
     {
-        private const string Base = $"{ApiBase}/pizza-orders";
+        private const string Base = $"{ApiBase}/orders";
 
         public const string Create = Base;
+        public const string Get = $"{Base}/{{id:guid}}";
     }
 }

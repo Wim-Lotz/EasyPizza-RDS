@@ -1,6 +1,6 @@
 ﻿namespace EasyPizza.Contracts.Requests;
 
-public sealed record CreatePizzaOrderRequest
+public sealed record CreateOrderRequest
 {
     public IEnumerable<PizzaRequest> Pizzas { get; init; } = [];
 }
