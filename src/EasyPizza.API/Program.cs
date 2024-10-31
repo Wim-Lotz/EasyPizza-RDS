@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 using EasyPizza.Application;
 using EasyPizza.Application.Commands;
 using EasyPizza.Application.Interfaces;
@@ -12,6 +14,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddControllers();
+
+builder.Services.AddControllers().AddJsonOptions(x =>
+    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
