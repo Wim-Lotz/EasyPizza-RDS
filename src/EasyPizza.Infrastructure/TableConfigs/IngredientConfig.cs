@@ -1,40 +1,26 @@
 ﻿namespace EasyPizza.Infrastructure.TableConfigs;
 
-public class IngredientConfig
+public class IngredientConfig : IEntityTypeConfiguration<Ingredient>
 {
-    public IngredientConfig(EntityTypeBuilder<Ingredient> entityTypeBuilder)
+    public void Configure(EntityTypeBuilder<Ingredient> builder)
     {
-        entityTypeBuilder.HasKey(p => p.Id);
-        
-        entityTypeBuilder.Property(p => p.Name).HasMaxLength(20);
-        entityTypeBuilder.Property(a => a.Name).IsRequired();
+        builder.HasKey(p => p.Id);
+        builder.Property(p => p.Id).ValueGeneratedNever();
 
-        entityTypeBuilder.Property(a => a.Price).IsRequired();
+        builder.Property(p => p.Name).HasMaxLength(20);
+        builder.Property(a => a.Name).IsRequired();
 
-        entityTypeBuilder.HasMany(e => e.PizzaIngredients)
+        builder.Property(a => a.Price).IsRequired();
+
+        builder.HasMany(e => e.PizzaIngredients)
             .WithOne(e => e.Ingredient)
             .HasForeignKey(e => e.IngredientId)
             .OnDelete(DeleteBehavior.NoAction)
             .IsRequired();
-        
-        entityTypeBuilder.HasData(
-            new Ingredient
-            {
-                Id = Guid.NewGuid(),
-                Name = "cheese",
-                Price = 1.25M
-            },
-            new Ingredient
-            {
-                Id = Guid.NewGuid(),
-                Name = "salami",
-                Price = 2.0M
-            },
-            new Ingredient
-            {
-                Id = Guid.NewGuid(),
-                Name = "green pepper",
-                Price = 0.25M
-            });
+
+        builder.HasData(
+            new Ingredient { Id = Guid.NewGuid(), Name = "cheese", Price = 1.25M },
+            new Ingredient { Id = Guid.NewGuid(), Name = "salami", Price = 2.0M },
+            new Ingredient { Id = Guid.NewGuid(), Name = "green pepper", Price = 0.25M });
     }
 }

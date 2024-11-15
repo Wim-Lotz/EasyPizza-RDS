@@ -1,18 +1,18 @@
 ﻿namespace EasyPizza.Infrastructure.TableConfigs;
 
-public class OrderLineConfig
+public class OrderLineConfig : IEntityTypeConfiguration<OrderLine>
 {
-    public OrderLineConfig(EntityTypeBuilder<OrderLine> entityTypeBuilder)
+    public void Configure(EntityTypeBuilder<OrderLine> builder)
     {
-        entityTypeBuilder.HasKey(p => p.Id);
+        builder.HasKey(p => p.Id);
 
-        entityTypeBuilder.HasOne(e => e.Pizza)
+        builder.HasOne(e => e.Pizza)
             .WithOne(e => e.OrderLine)
             .HasForeignKey<OrderLine>(e => e.PizzaId)
             .OnDelete(DeleteBehavior.NoAction)
             .IsRequired();
-        
-        entityTypeBuilder.HasOne(e => e.Order)
+
+        builder.HasOne(e => e.Order)
             .WithMany(e => e.OrderLines)
             .HasForeignKey(e => e.OrderId)
             .OnDelete(DeleteBehavior.NoAction)

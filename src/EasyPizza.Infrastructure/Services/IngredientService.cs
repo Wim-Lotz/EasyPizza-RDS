@@ -46,12 +46,12 @@ public class IngredientService : IIngredientService
 
     public async Task<bool> DoesIngredientExistAsync(string name, CancellationToken cancellationToken = default)
     {
-        return await _context.Ingredients.AnyAsync(i => i.Name.ToLower() == name.ToLower(), cancellationToken);
+        return await _context.Ingredients.AsNoTracking().AnyAsync(i => i.Name.ToLower() == name.ToLower(), cancellationToken);
     }
 
     public async Task<bool> IsNameTheSame(Guid id, string name, CancellationToken cancellationToken = default)
     {
-        var ingredient = await _context.Ingredients.FirstOrDefaultAsync(i => i.Id == id, cancellationToken);
+        var ingredient = await _context.Ingredients.AsNoTracking().FirstOrDefaultAsync(i => i.Id == id, cancellationToken);
 
         return ingredient != null && ingredient.Name == name;
     }

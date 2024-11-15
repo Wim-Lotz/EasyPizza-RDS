@@ -1,17 +1,17 @@
 ﻿namespace EasyPizza.Contracts.Requests;
 
-public sealed record CreateOrderRequest
+public record struct CreateOrderRequest
 {
-    public IEnumerable<PizzaRequest> Pizzas { get; init; } = [];
+    public IEnumerable<PizzaRequest> Pizzas { get; init; }
 }
 
-public sealed record PizzaRequest
+public record struct PizzaRequest
 {
     public required PizzaBaseRequest PizzaBase { get; init; }
-    public IEnumerable<PizzaIngredientRequest> PizzaIngredients { get; init; } = [];
+    public IEnumerable<PizzaIngredientRequest> PizzaIngredients { get; init; }
 }
 
-public sealed record PizzaBaseRequest
+public record struct PizzaBaseRequest
 {
     public required Guid Id { get; init; }
     public required string Name { get; init; }
@@ -19,7 +19,7 @@ public sealed record PizzaBaseRequest
     public required decimal Price { get; init; }
 }
 
-public sealed record PizzaIngredientRequest
+public record struct PizzaIngredientRequest
 {
     public required Guid Id { get; init; }
     public required string Name { get; init; }

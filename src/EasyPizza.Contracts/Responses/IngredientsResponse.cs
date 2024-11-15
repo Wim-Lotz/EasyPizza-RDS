@@ -1,6 +1,6 @@
 ﻿namespace EasyPizza.Contracts.Responses;
 
-public sealed record IngredientsResponse
+public record struct IngredientsResponse
 {
-    public IEnumerable<IngredientResponse> Items { get; init; } = [];
+    public IEnumerable<IngredientResponse> Items { get; init; }
 }

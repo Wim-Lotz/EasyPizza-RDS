@@ -47,7 +47,7 @@ public class PizzaBaseService : IPizzaBaseService
 
     public async Task<bool> DoesNameSizeComboExistAsync(PizzaBase pizzaBase, CancellationToken cancellationToken = default)
     {
-        var result = await _context.PizzaBases.
+        var result = await _context.PizzaBases.AsNoTracking().
             FirstOrDefaultAsync(b => b.Name == pizzaBase.Name && b.PizzaBaseSize == pizzaBase.PizzaBaseSize, cancellationToken);
         
         return result != null;
@@ -55,7 +55,7 @@ public class PizzaBaseService : IPizzaBaseService
     
     public async Task<bool> IsNameTheSame(Guid id, string name, CancellationToken cancellationToken = default)
     {
-        var pizzaBase = await _context.PizzaBases.FirstOrDefaultAsync(i => i.Id == id, cancellationToken);
+        var pizzaBase = await _context.PizzaBases.AsNoTracking().FirstOrDefaultAsync(i => i.Id == id, cancellationToken);
 
         return pizzaBase != null && pizzaBase.Name == name;
     }

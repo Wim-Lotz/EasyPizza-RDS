@@ -16,12 +16,7 @@ public class EasyPizzaDbContext : DbContext, IEasyPizzaDbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        new IngredientConfig(modelBuilder.Entity<Ingredient>());
-        new OrderConfig(modelBuilder.Entity<Order>());
-        new OrderLineConfig(modelBuilder.Entity<OrderLine>());
-        new PizzaBaseConfig(modelBuilder.Entity<PizzaBase>());
-        new PizzaConfig(modelBuilder.Entity<Pizza>());
-        new PizzaIngredientConfig(modelBuilder.Entity<PizzaIngredient>());
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(EasyPizzaDbContext).Assembly);
     }
 
     public DbSet<Ingredient> Ingredients { get; set; }

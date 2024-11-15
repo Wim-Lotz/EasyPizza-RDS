@@ -1,6 +1,6 @@
 ﻿namespace EasyPizza.Contracts.Responses;
 
-public record PizzaBaseResponse
+public record struct PizzaBaseResponse
 {
     public required Guid Id { get; init; }
     public required string Name { get; init; }

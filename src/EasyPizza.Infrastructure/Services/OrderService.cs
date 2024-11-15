@@ -13,6 +13,18 @@ public class OrderService : IOrderService
         _logger = logger;
     }
 
+    public async Task<IEnumerable<Order>> GetAllAsync(CancellationToken cancellationToken = default)
+    {
+        return await _context.Orders
+            .Include(or => or.OrderLines)
+            .ThenInclude(t => t.Pizza)
+            .ThenInclude(t => t.PizzaIngredients)
+            .ThenInclude(t => t.Ingredient)
+            .Include(or => or.OrderLines)
+            .ThenInclude(t => t.Pizza)
+            .ThenInclude(t => t.PizzaBase).ToListAsync(cancellationToken);
+    }
+
     public async Task<Order?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
         return await _context.Orders

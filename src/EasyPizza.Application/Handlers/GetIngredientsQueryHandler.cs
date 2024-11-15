@@ -1,6 +1,6 @@
 ﻿namespace EasyPizza.Application.Handlers;
 
-public class GetIngredientsQueryHandler:IRequestHandler<GetIngredientsQuery, IEnumerable<Ingredient>>
+public class GetIngredientsQueryHandler : IRequestHandler<GetIngredientsQuery, IEnumerable<Ingredient>>
 {
     private readonly IIngredientService _ingredientService;
 

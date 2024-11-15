@@ -1,0 +1,66 @@
+﻿@EasyPizza_API_HostAddress = https://localhost:7182
+
+### Get All
+
+GET {{EasyPizza_API_HostAddress}}/api/orders
+Accept: application/json
+
+### Get By Id
+
+GET {{EasyPizza_API_HostAddress}}/api/orders/1a9c7bf4-9571-4d8f-a828-b7e56b8022bb
+Accept: application/json
+
+### Create
+
+POST {{EasyPizza_API_HostAddress}}/api/orders
+Content-Type: application/json
+
+{
+  "pizzas": [
+    {
+      "pizzaBase": {
+        "id": "0434c226-a2d5-4d2b-9d62-e969a7c62c08",
+        "name": "thin crust",
+        "size": "Small",
+        "price": 1.0
+      },
+      "pizzaIngredients": [
+        {
+          "id": "76ad2763-e715-4125-8087-03be7eb00552",
+          "name": "salami",
+          "price": 2.0
+        },
+        {
+          "id": "16af5c15-3814-4590-a385-897ad7919556",
+          "name": "cheese",
+          "price": 1.25
+        },
+        {
+          "id": "b3165107-8c02-44ea-86f2-3c31bbe2be5d",
+          "name": "green pepper",
+          "price": 0.25
+        }
+      ]
+    },
+    {
+      "pizzaBase": {
+        "id": "325f0ea3-ce42-4aec-b0a2-a5d3a43905dc",
+        "name": "gluten free",
+        "size": "Medium",
+        "price": 1.0
+      },
+      "pizzaIngredients": [
+        {
+          "id": "76ad2763-e715-4125-8087-03be7eb00552",
+          "name": "salami",
+          "price": 2.0
+        },
+        {
+          "id": "16af5c15-3814-4590-a385-897ad7919556",
+          "name": "cheese",
+          "price": 1.25
+        }
+      ]
+    }
+  ]
+}
