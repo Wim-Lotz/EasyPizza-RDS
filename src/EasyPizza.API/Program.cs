@@ -1,13 +1,5 @@
-using System.Text.Json.Serialization;
-
 using EasyPizza.Application;
-using EasyPizza.Application.Commands;
-using EasyPizza.Application.Interfaces;
 using EasyPizza.Infrastructure;
-using EasyPizza.Infrastructure.Services;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddControllers().AddJsonOptions(x =>
-    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+    x.JsonSerializerOptions.ReferenceHandler = null);
+
+builder.Services.AddHealthChecks().AddDbContextCheck<EasyPizzaDbContext>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -32,6 +26,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.MapHealthChecks("_health");
 
 app.UseHttpsRedirection();
 app.UseAuthorization();

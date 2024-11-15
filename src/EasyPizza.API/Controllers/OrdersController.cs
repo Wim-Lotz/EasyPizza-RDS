@@ -12,6 +12,14 @@ public class OrdersController : ControllerBase
         _logger = logger;
     }
     
+    [HttpGet(ApiEndpoints.Orders.GetAll)]
+    public async Task<IActionResult> GetAll(CancellationToken token)
+    {
+        var orders = await _mediator.Send(new GetOrdersQuery(), token);
+        var response = orders.MapToResponse();
+        return Ok(response);
+    }
+    
     [HttpGet(ApiEndpoints.Orders.Get)]
     public async Task<IActionResult> Get([FromRoute] Guid id, CancellationToken token)
     {

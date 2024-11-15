@@ -7,5 +7,33 @@ Accept: application/json
 
 ### Get by Id
 
-GET {{EasyPizza_API_HostAddress}}/api/pizza-bases/377f0f28-1b9b-407c-9e16-eb34bb6df709
+GET {{EasyPizza_API_HostAddress}}/api/pizza-bases/a6eb2e84-bed5-47b7-bb1c-b532accd2225
 Accept: application/json
+
+### Create
+
+POST {{EasyPizza_API_HostAddress}}/api/pizza-bases
+Content-Type: application/json
+
+{
+  "name": "Cheese Crust & beer",
+  "price": 1.23,
+  "size": "MEDIUM"
+}
+
+### Update
+
+PUT {{EasyPizza_API_HostAddress}}/api/pizza-bases/a6eb2e84-bed5-47b7-bb1c-b532accd2225
+Content-Type: application/json
+
+{
+  "name": "cheese crust & beer",
+  "price": 1.50,
+  "size": "MEDIUM",
+  "deleted": true
+}
+
+### Delete
+
+DELETE {{EasyPizza_API_HostAddress}}/api/pizza-bases/a6eb2e84-bed5-47b7-bb1c-b532accd2225
+Content-Type: application/json

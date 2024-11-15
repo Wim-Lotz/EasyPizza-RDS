@@ -89,6 +89,10 @@ public static class ContractMapping
         };
     }
 
+    public static OrdersResponse MapToResponse(this IEnumerable<Order> orders)
+    {
+        return new OrdersResponse { Items = orders.Select(MapToResponse) };
+    }
     public static OrderResponse MapToResponse(this Order request)
     {
         var pizzaResponseList = new List<PizzaResponse>();

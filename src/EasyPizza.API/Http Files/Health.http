@@ -1,0 +1,6 @@
+﻿@EasyPizza_API_HostAddress = https://localhost:7182
+
+### Check Health
+
+GET {{EasyPizza_API_HostAddress}}/_health
+Accept: application/json
