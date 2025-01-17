@@ -1,3 +1,3 @@
 ﻿namespace EasyPizza.Application.Queries;
 
-public sealed record GetIngredientsQuery : IRequest<IEnumerable<Ingredient>>;
+public sealed record GetIngredientsQuery(string? Name) : IRequest<IEnumerable<Ingredient>>;
