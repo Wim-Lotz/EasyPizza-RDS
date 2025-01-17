@@ -1,4 +1,6 @@
-﻿namespace EasyPizza.Infrastructure.Services;
+﻿using EasyPizza.Domain.Enums;
+
+namespace EasyPizza.Infrastructure.Services;
 
 public class IngredientService : IIngredientService
 {
@@ -9,14 +11,24 @@ public class IngredientService : IIngredientService
         _context = context;
     }
 
-    public async Task<IEnumerable<Ingredient>> GetAllAsync(string? name, CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<Ingredient>> GetAllAsync(string? name, string? sortField, SortOrder sortOrder, CancellationToken cancellationToken = default)
     {
-        if (name is null)
+        var query = _context.Ingredients.AsQueryable();
+
+        if (name is not null)
         {
-            return await _context.Ingredients.ToListAsync(cancellationToken);
+            query = query.Where(x => x.Name.Contains(name));
         }
 
-        return await _context.Ingredients.Where(s => s.Name.Contains(name)).ToListAsync(cancellationToken);
+        if (sortField is not null)
+        {
+            if (string.Equals(sortField, "Name", StringComparison.OrdinalIgnoreCase))
+            {
+                query = sortOrder == SortOrder.Ascending ? query.OrderBy(x => x.Name) : query.OrderByDescending(x => x.Name);
+            }
+        }
+
+        return await query.ToListAsync(cancellationToken);
     }
 
     public async Task<Ingredient?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)

@@ -1,4 +1,6 @@
-﻿namespace EasyPizza.API.Controllers;
+﻿using EasyPizza.API.Helpers;
+
+namespace EasyPizza.API.Controllers;
 
 [ApiController]
 public class IngredientsController : ControllerBase
@@ -15,7 +17,8 @@ public class IngredientsController : ControllerBase
     [HttpGet(ApiEndpoints.Ingredients.GetAll)]
     public async Task<IActionResult> GetAll([FromQuery] GetAllIngredientsRequest request, CancellationToken token)
     {
-        var ingredients = await _mediator.Send(new GetIngredientsQuery(request.Name), token);
+        var (sortField, sortOrder) = request.GetSortInfo();
+        var ingredients = await _mediator.Send(new GetIngredientsQuery(request.Name, sortField, sortOrder), token);
         var response = ingredients.MapToResponse();
         return Ok(response);
     }

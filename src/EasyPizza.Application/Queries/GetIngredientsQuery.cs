@@ -1,3 +1,5 @@
-﻿namespace EasyPizza.Application.Queries;
+﻿using EasyPizza.Domain.Enums;
 
-public sealed record GetIngredientsQuery(string? Name) : IRequest<IEnumerable<Ingredient>>;
+namespace EasyPizza.Application.Queries;
+
+public sealed record GetIngredientsQuery(string? Name, string? SortField, SortOrder SortOrder) : IRequest<IEnumerable<Ingredient>>;
