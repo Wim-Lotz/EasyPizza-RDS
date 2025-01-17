@@ -13,9 +13,9 @@ public class IngredientsController : ControllerBase
     }
 
     [HttpGet(ApiEndpoints.Ingredients.GetAll)]
-    public async Task<IActionResult> GetAll(CancellationToken token)
+    public async Task<IActionResult> GetAll([FromQuery] GetAllIngredientsRequest request, CancellationToken token)
     {
-        var ingredients = await _mediator.Send(new GetIngredientsQuery(), token);
+        var ingredients = await _mediator.Send(new GetIngredientsQuery(request.Name), token);
         var response = ingredients.MapToResponse();
         return Ok(response);
     }

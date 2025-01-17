@@ -11,6 +11,6 @@ public class GetIngredientsQueryHandler : IRequestHandler<GetIngredientsQuery, I
 
     public Task<IEnumerable<Ingredient>> Handle(GetIngredientsQuery request, CancellationToken cancellationToken)
     {
-        return _ingredientService.GetAllAsync(cancellationToken);
+        return _ingredientService.GetAllAsync(request.Name, cancellationToken);
     }
 }

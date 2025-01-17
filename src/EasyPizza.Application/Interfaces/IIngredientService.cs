@@ -2,7 +2,7 @@
 
 public interface IIngredientService
 {
-    Task<IEnumerable<Ingredient>> GetAllAsync(CancellationToken cancellationToken = default);
+    Task<IEnumerable<Ingredient>> GetAllAsync(string? name, CancellationToken cancellationToken = default);
     Task<Ingredient?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
     Task CreateAsync(Ingredient ingredient, CancellationToken cancellationToken = default);
     Task<bool> UpdateAsync(Ingredient ingredient, CancellationToken cancellationToken = default);

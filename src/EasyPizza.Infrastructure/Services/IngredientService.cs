@@ -9,9 +9,14 @@ public class IngredientService : IIngredientService
         _context = context;
     }
 
-    public async Task<IEnumerable<Ingredient>> GetAllAsync(CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<Ingredient>> GetAllAsync(string? name, CancellationToken cancellationToken = default)
     {
-        return await _context.Ingredients.ToListAsync(cancellationToken);
+        if (name is null)
+        {
+            return await _context.Ingredients.ToListAsync(cancellationToken);
+        }
+
+        return await _context.Ingredients.Where(s => s.Name.Contains(name)).ToListAsync(cancellationToken);
     }
 
     public async Task<Ingredient?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
