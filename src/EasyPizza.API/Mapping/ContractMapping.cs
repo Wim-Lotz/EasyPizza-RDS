@@ -89,9 +89,15 @@ public static class ContractMapping
         };
     }
 
-    public static OrdersResponse MapToResponse(this IEnumerable<Order> orders)
+    public static OrdersResponse MapToResponse(this IEnumerable<Order> orders, int page, int pageSize, int ordersCount)
     {
-        return new OrdersResponse { Items = orders.Select(MapToResponse) };
+        return new OrdersResponse
+        {
+            Items = orders.Select(MapToResponse),
+            Page = page,
+            PageSize = pageSize,
+            Total = ordersCount
+        };
     }
     public static OrderResponse MapToResponse(this Order request)
     {

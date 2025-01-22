@@ -13,10 +13,11 @@ public class OrdersController : ControllerBase
     }
     
     [HttpGet(ApiEndpoints.Orders.GetAll)]
-    public async Task<IActionResult> GetAll(CancellationToken token)
+    public async Task<IActionResult> GetAll([FromQuery] GetOrdersRequest request, CancellationToken token)
     {
-        var orders = await _mediator.Send(new GetOrdersQuery(), token);
-        var response = orders.MapToResponse();
+        var orders = await _mediator.Send(new GetOrdersQuery(request.Page, request.PageSize), token);
+        var ordersCount = await _mediator.Send(new GetOrdersCountQuery(), token);
+        var response = orders.MapToResponse(request.Page, request.PageSize, ordersCount);
         return Ok(response);
     }
     

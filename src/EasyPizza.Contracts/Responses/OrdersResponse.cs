@@ -1,6 +1,6 @@
 ﻿namespace EasyPizza.Contracts.Responses;
 
-public record struct OrdersResponse
+public class OrdersResponse : PagedResponse<OrderResponse>
 {
-    public IEnumerable<OrderResponse> Items { get; init; }
+    
 }

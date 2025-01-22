@@ -5,15 +5,13 @@ namespace EasyPizza.Infrastructure.Services;
 public class OrderService : IOrderService
 {
     private readonly IEasyPizzaDbContext _context;
-    private readonly ILogger<OrderService> _logger;
 
     public OrderService(IEasyPizzaDbContext context, ILogger<OrderService> logger)
     {
         _context = context;
-        _logger = logger;
     }
 
-    public async Task<IEnumerable<Order>> GetAllAsync(CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<Order>> GetAllAsync(int page, int pageSize, CancellationToken cancellationToken = default)
     {
         return await _context.Orders
             .Include(or => or.OrderLines)
@@ -22,7 +20,9 @@ public class OrderService : IOrderService
             .ThenInclude(t => t.Ingredient)
             .Include(or => or.OrderLines)
             .ThenInclude(t => t.Pizza)
-            .ThenInclude(t => t.PizzaBase).ToListAsync(cancellationToken);
+            .ThenInclude(t => t.PizzaBase)
+            .Skip((page -1) * pageSize)
+            .Take(pageSize).ToListAsync(cancellationToken);
     }
 
     public async Task<Order?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
@@ -42,5 +42,10 @@ public class OrderService : IOrderService
     {
         await _context.Orders.AddAsync(order, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
+    }
+
+    public async Task<int> GetCountAsync(CancellationToken cancellationToken = default)
+    {
+        return await _context.Orders.CountAsync(cancellationToken);
     }
 }
