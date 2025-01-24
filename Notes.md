@@ -29,12 +29,11 @@ using exceptions for validation (using exceptions as I am using mediatr, so I ne
 
 TODO
 
-caching
-pagination
-sorting
-api versioning
 swagger
+caching
 auth
+review hateos
+scalar
 
 
 

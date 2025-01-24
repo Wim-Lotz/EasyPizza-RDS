@@ -6,3 +6,4 @@ global using Microsoft.AspNetCore.Mvc;
 global using EasyPizza.Contracts.Responses;
 global using EasyPizza.Domain.Entities;
 global using EasyPizza.Application.Commands;
+global using Asp.Versioning;

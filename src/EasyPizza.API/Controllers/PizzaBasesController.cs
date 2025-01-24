@@ -1,6 +1,7 @@
 ﻿namespace EasyPizza.API.Controllers;
 
 [ApiController]
+[ApiVersion(1.0)]
 public class PizzaBasesController : ControllerBase
 {
     private readonly IMediator _mediator;
