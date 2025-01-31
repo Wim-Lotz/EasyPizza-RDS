@@ -16,8 +16,7 @@
 * Pagination
 * Sorting
 * Validation
-* Api Versioning
-* Swagger
+* Url Based Api Versioning
 * Authentication (simple token creation) and Authorization
 * Health Checks
 * Docker Compose Orchestration

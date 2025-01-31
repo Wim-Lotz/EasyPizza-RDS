@@ -1,4 +1,5 @@
-﻿using EasyPizza.Domain.Enums;
+﻿using EasyPizza.Contracts.Requests.V1;
+using EasyPizza.Domain.Enums;
 
 namespace EasyPizza.API.Helpers;
 

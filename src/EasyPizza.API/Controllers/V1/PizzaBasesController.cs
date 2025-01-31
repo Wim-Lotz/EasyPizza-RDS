@@ -1,7 +1,8 @@
-﻿namespace EasyPizza.API.Controllers;
+﻿using EasyPizza.Contracts.Requests.V1;
+
+namespace EasyPizza.Api.Controllers.V1;
 
 [ApiController]
-[ApiVersion(1.0)]
 public class PizzaBasesController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -13,7 +14,7 @@ public class PizzaBasesController : ControllerBase
         _logger = logger;
     }
 
-    [HttpGet(ApiEndpoints.PizzaBases.GetAll)]
+    [HttpGet(ApiEndpoints.V1.PizzaBases.GetAll)]
     public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
     {
         var pizzaBases = await _mediator.Send(new GetPizzaBasesQuery(), cancellationToken);
@@ -21,7 +22,7 @@ public class PizzaBasesController : ControllerBase
         return Ok(response);
     }
     
-    [HttpGet(ApiEndpoints.PizzaBases.Get)]
+    [HttpGet(ApiEndpoints.V1.PizzaBases.Get)]
     public async Task<IActionResult> Get([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var pizzaBase = await _mediator.Send(new GetPizzaBaseQuery(id), cancellationToken);
@@ -33,7 +34,7 @@ public class PizzaBasesController : ControllerBase
         return Ok(response);
     }
     
-    [HttpPost(ApiEndpoints.PizzaBases.Create)]
+    [HttpPost(ApiEndpoints.V1.PizzaBases.Create)]
     public async Task<IActionResult> Create([FromBody] CreatePizzaBaseRequest request, CancellationToken cancellationToken)
     {
         var pizzaBase = request.MapToBase();
@@ -44,7 +45,7 @@ public class PizzaBasesController : ControllerBase
         return CreatedAtAction(nameof(Get), new { id = response.Id }, response);
     }
     
-    [HttpPut(ApiEndpoints.PizzaBases.Update)]
+    [HttpPut(ApiEndpoints.V1.PizzaBases.Update)]
     public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdatePizzaBaseRequest request, CancellationToken cancellationToken)
     {
         var pizzaBase = request.MapToBase(id);
@@ -57,7 +58,7 @@ public class PizzaBasesController : ControllerBase
         return Ok(response);
     }
     
-    [HttpDelete(ApiEndpoints.PizzaBases.Delete)]
+    [HttpDelete(ApiEndpoints.V1.PizzaBases.Delete)]
     public async Task<IActionResult> Delete([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var success = await _mediator.Send(new DeletePizzaBaseCommand(id), cancellationToken);

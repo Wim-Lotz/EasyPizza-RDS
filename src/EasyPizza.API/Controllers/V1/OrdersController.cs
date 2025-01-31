@@ -1,19 +1,18 @@
-﻿namespace EasyPizza.API.Controllers;
+﻿using EasyPizza.Contracts.Requests.V1;
+
+namespace EasyPizza.Api.Controllers.V1;
 
 [ApiController]
-[ApiVersion(1.0)]
 public class OrdersController : ControllerBase
 {
     private readonly IMediator _mediator;
-    private readonly ILogger<OrdersController> _logger;
     
-    public OrdersController(IMediator mediator, ILogger<OrdersController> logger)
+    public OrdersController(IMediator mediator)
     {
         _mediator = mediator;
-        _logger = logger;
     }
     
-    [HttpGet(ApiEndpoints.Orders.GetAll)]
+    [HttpGet(ApiEndpoints.V1.Orders.GetAll)]
     public async Task<IActionResult> GetAll([FromQuery] GetOrdersRequest request, CancellationToken token)
     {
         var orders = await _mediator.Send(new GetOrdersQuery(request.Page, request.PageSize), token);
@@ -22,7 +21,7 @@ public class OrdersController : ControllerBase
         return Ok(response);
     }
     
-    [HttpGet(ApiEndpoints.Orders.Get)]
+    [HttpGet(ApiEndpoints.V1.Orders.Get)]
     public async Task<IActionResult> Get([FromRoute] Guid id, CancellationToken token)
     {
         var order = await _mediator.Send(new GetOrderQuery(id), token);
@@ -35,7 +34,7 @@ public class OrdersController : ControllerBase
         return Ok(response);
     }
     
-    [HttpPost(ApiEndpoints.Orders.Create)]
+    [HttpPost(ApiEndpoints.V1.Orders.Create)]
     public async Task<IActionResult> Create([FromBody] CreateOrderRequest request, CancellationToken token)
     {
         var order = request.MapToOrder();

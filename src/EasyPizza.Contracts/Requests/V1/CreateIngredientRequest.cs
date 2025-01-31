@@ -1,4 +1,4 @@
-﻿namespace EasyPizza.Contracts.Requests;
+﻿namespace EasyPizza.Contracts.Requests.V1;
 
 public record struct CreateIngredientRequest
 {

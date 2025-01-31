@@ -2,17 +2,17 @@
 
 ### Get All
 
-GET {{EasyPizza_API_HostAddress}}/api/Ingredients
+GET {{EasyPizza_API_HostAddress}}/api/v1/Ingredients
 Accept: application/json
 
 ### Get By Id
 
-GET {{EasyPizza_API_HostAddress}}/api/Ingredients/c5d09959-9823-43b0-a2fe-3f1fa2591cda
+GET {{EasyPizza_API_HostAddress}}/api/v1/Ingredients/c5d09959-9823-43b0-a2fe-3f1fa2591cda
 Accept: application/json
 
 ### Create
 
-POST {{EasyPizza_API_HostAddress}}/api/Ingredients
+POST {{EasyPizza_API_HostAddress}}/api/v1/Ingredients
 Content-Type: application/json
 
 {
@@ -22,7 +22,7 @@ Content-Type: application/json
 
 ### Update
 
-PUT {{EasyPizza_API_HostAddress}}/api/Ingredients/c5d09959-9823-43b0-a2fe-3f1fa2591cda
+PUT {{EasyPizza_API_HostAddress}}/api/v1/Ingredients/c5d09959-9823-43b0-a2fe-3f1fa2591cda
 Content-Type: application/json
 
 {
@@ -33,6 +33,6 @@ Content-Type: application/json
 
 ### Delete
 
-DELETE {{EasyPizza_API_HostAddress}}/api/Ingredients/c5d09959-9823-43b0-a2fe-3f1fa2591cda
+DELETE {{EasyPizza_API_HostAddress}}/api/v1/Ingredients/c5d09959-9823-43b0-a2fe-3f1fa2591cda
 Content-Type: application/json
 

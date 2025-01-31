@@ -2,17 +2,17 @@
 
 ### Get All
 
-GET {{EasyPizza_API_HostAddress}}/api/pizza-bases
+GET {{EasyPizza_API_HostAddress}}/api/v1/pizza-bases
 Accept: application/json
 
 ### Get by Id
 
-GET {{EasyPizza_API_HostAddress}}/api/pizza-bases/a6eb2e84-bed5-47b7-bb1c-b532accd2225
+GET {{EasyPizza_API_HostAddress}}/api/v1/pizza-bases/a6eb2e84-bed5-47b7-bb1c-b532accd2225
 Accept: application/json
 
 ### Create
 
-POST {{EasyPizza_API_HostAddress}}/api/pizza-bases
+POST {{EasyPizza_API_HostAddress}}/api/v1/pizza-bases
 Content-Type: application/json
 
 {
@@ -23,7 +23,7 @@ Content-Type: application/json
 
 ### Update
 
-PUT {{EasyPizza_API_HostAddress}}/api/pizza-bases/a6eb2e84-bed5-47b7-bb1c-b532accd2225
+PUT {{EasyPizza_API_HostAddress}}/api/v1/pizza-bases/a6eb2e84-bed5-47b7-bb1c-b532accd2225
 Content-Type: application/json
 
 {
@@ -35,5 +35,5 @@ Content-Type: application/json
 
 ### Delete
 
-DELETE {{EasyPizza_API_HostAddress}}/api/pizza-bases/a6eb2e84-bed5-47b7-bb1c-b532accd2225
+DELETE {{EasyPizza_API_HostAddress}}/api/v1/pizza-bases/a6eb2e84-bed5-47b7-bb1c-b532accd2225
 Content-Type: application/json

@@ -1,21 +1,22 @@
-﻿using EasyPizza.API.Helpers;
+﻿using EasyPizza.Contracts.Requests.V1;
 
-namespace EasyPizza.API.Controllers;
+namespace EasyPizza.Api.Controllers.V1;
 
 [ApiController]
-[ApiVersion(1.0)]
 public class IngredientsController : ControllerBase
 {
     private readonly IMediator _mediator;
-    private readonly ILogger<IngredientsController> _logger;
+    private readonly IOutputCacheStore _outputCacheStore;
 
-    public IngredientsController(IMediator mediator, ILogger<IngredientsController> logger)
+    public IngredientsController(IMediator mediator, IOutputCacheStore outputCacheStore)
     {
         _mediator = mediator;
-        _logger = logger;
+        _outputCacheStore = outputCacheStore;
     }
 
-    [HttpGet(ApiEndpoints.Ingredients.GetAll)]
+    [HttpGet(ApiEndpoints.V1.Ingredients.GetAll)]
+    [OutputCache(PolicyName = "IngredientsCache")]
+    // [ResponseCache(Duration = 30, VaryByQueryKeys = ["name"], VaryByHeader = "Accept, Accept-Encoding", Location = ResponseCacheLocation.Any)]
     public async Task<IActionResult> GetAll([FromQuery] GetAllIngredientsRequest request, CancellationToken token)
     {
         var (sortField, sortOrder) = request.GetSortInfo();
@@ -24,7 +25,9 @@ public class IngredientsController : ControllerBase
         return Ok(response);
     }
     
-    [HttpGet(ApiEndpoints.Ingredients.Get)]
+    [HttpGet(ApiEndpoints.V1.Ingredients.Get)]
+    [OutputCache(PolicyName = "IngredientsCache")]
+    // [ResponseCache(Duration = 30, VaryByHeader = "Accept, Accept-Encoding", Location = ResponseCacheLocation.Any)]
     public async Task<IActionResult> Get([FromRoute] Guid id, CancellationToken token)
     {
         var ingredient = await _mediator.Send(new GetIngredientQuery(id), token);
@@ -37,16 +40,17 @@ public class IngredientsController : ControllerBase
         return Ok(response);
     }
    
-    [HttpPost(ApiEndpoints.Ingredients.Create)]
+    [HttpPost(ApiEndpoints.V1.Ingredients.Create)]
     public async Task<IActionResult> Create([FromBody] CreateIngredientRequest request, CancellationToken token)
     {
         var ingredient = request.MapToIngredient();
         await _mediator.Send(new CreateIngredientCommand(ingredient), token);
+        await _outputCacheStore.EvictByTagAsync("ingredients", token);
         var response = ingredient.MapToResponse();
         return CreatedAtAction(nameof(Get), new { id = response.Id }, response);
     }
 
-    [HttpPut(ApiEndpoints.Ingredients.Update)]
+    [HttpPut(ApiEndpoints.V1.Ingredients.Update)]
     public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateIngredientRequest request, CancellationToken token)
     {
         var ingredient = request.MapToIngredient(id);
@@ -55,12 +59,12 @@ public class IngredientsController : ControllerBase
         {
             return NotFound();
         }
-
+        await _outputCacheStore.EvictByTagAsync("ingredients", token);
         var response = ingredient.MapToResponse();
         return Ok(response);
     }
 
-    [HttpDelete(ApiEndpoints.Ingredients.Delete)]
+    [HttpDelete(ApiEndpoints.V1.Ingredients.Delete)]
     public async Task<IActionResult> Delete([FromRoute] Guid id, CancellationToken token)
     {
         var success = await _mediator.Send(new DeleteIngredientCommand(id), token);
@@ -68,7 +72,7 @@ public class IngredientsController : ControllerBase
         {
             return NotFound();
         }
-
+        await _outputCacheStore.EvictByTagAsync("ingredients", token);
         return Ok();
     }
 }

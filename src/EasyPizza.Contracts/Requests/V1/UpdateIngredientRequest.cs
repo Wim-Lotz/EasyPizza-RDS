@@ -1,8 +1,7 @@
-﻿namespace EasyPizza.Contracts.Responses;
+﻿namespace EasyPizza.Contracts.Requests.V1;
 
-public record struct IngredientResponse
+public record struct UpdateIngredientRequest
 {
-    public required Guid Id { get; init; }
     public required string Name { get; init; }
     public required decimal Price { get; init; }
     public required bool Deleted { get; init; }

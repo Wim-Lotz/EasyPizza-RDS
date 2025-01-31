@@ -1,5 +1,7 @@
 ﻿using System.Security.Cryptography.X509Certificates;
 
+using EasyPizza.Contracts.Requests.V1;
+using EasyPizza.Contracts.Responses.V1;
 using EasyPizza.Domain.Enums;
 
 namespace EasyPizza.API.Mapping;

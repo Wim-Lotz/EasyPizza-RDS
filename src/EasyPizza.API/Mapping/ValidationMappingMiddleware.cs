@@ -1,4 +1,6 @@
 ﻿
+using EasyPizza.Contracts.Responses.V1;
+
 using FluentValidation;
 
 namespace EasyPizza.API.Mapping;

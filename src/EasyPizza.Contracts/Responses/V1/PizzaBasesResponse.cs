@@ -1,4 +1,4 @@
-﻿namespace EasyPizza.Contracts.Responses;
+﻿namespace EasyPizza.Contracts.Responses.V1;
 
 public record struct PizzaBasesResponse
 {
