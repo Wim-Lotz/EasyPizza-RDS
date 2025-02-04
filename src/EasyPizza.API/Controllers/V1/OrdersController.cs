@@ -1,7 +1,6 @@
-﻿using EasyPizza.Contracts.Requests.V1;
+﻿namespace EasyPizza.Api.Controllers.V1;
 
-namespace EasyPizza.Api.Controllers.V1;
-
+[Authorize]
 [ApiController]
 public class OrdersController : ControllerBase
 {
@@ -34,6 +33,7 @@ public class OrdersController : ControllerBase
         return Ok(response);
     }
     
+    [Authorize(AuthConstants.TrustedMemberPolicyName)]
     [HttpPost(ApiEndpoints.V1.Orders.Create)]
     public async Task<IActionResult> Create([FromBody] CreateOrderRequest request, CancellationToken token)
     {

@@ -1,0 +1,44 @@
+﻿### No Claim Token
+
+POST https://localhost:5003/token
+Accept: application/json
+Content-Type: application/json
+
+{
+  "userId": "82b32e8b-4707-4aa5-8f49-09b8bc9e3252",
+  "email" : "wim@mail.com",
+  "customClaims": {
+    "admin": false,
+    "trusted_member" :  false
+  }
+}
+
+### Create Trusted User Token
+
+POST https://localhost:5003/token
+Accept: application/json
+Content-Type: application/json
+
+{
+  "userId": "82b32e8b-4707-4aa5-8f49-09b8bc9e3252",
+  "email" : "wim@mail.com",
+  "customClaims": {
+    "admin": false,
+    "trusted_member" :  true
+  }
+}
+
+### Create Admin Token
+
+POST https://localhost:5003/token
+Accept: application/json
+Content-Type: application/json
+
+{
+	"userId": "82b32e8b-4707-4aa5-8f49-09b8bc9e3252",
+	"email" : "wim@mail.com",
+	"customClaims": {
+		"admin": true,
+		"trusted_member" :  false
+	}
+}

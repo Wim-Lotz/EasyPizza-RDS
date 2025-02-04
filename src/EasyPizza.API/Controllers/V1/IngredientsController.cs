@@ -1,7 +1,6 @@
-﻿using EasyPizza.Contracts.Requests.V1;
+﻿namespace EasyPizza.Api.Controllers.V1;
 
-namespace EasyPizza.Api.Controllers.V1;
-
+[Authorize]
 [ApiController]
 public class IngredientsController : ControllerBase
 {
@@ -13,7 +12,7 @@ public class IngredientsController : ControllerBase
         _mediator = mediator;
         _outputCacheStore = outputCacheStore;
     }
-
+    
     [HttpGet(ApiEndpoints.V1.Ingredients.GetAll)]
     [OutputCache(PolicyName = "IngredientsCache")]
     // [ResponseCache(Duration = 30, VaryByQueryKeys = ["name"], VaryByHeader = "Accept, Accept-Encoding", Location = ResponseCacheLocation.Any)]
@@ -40,6 +39,7 @@ public class IngredientsController : ControllerBase
         return Ok(response);
     }
    
+    [Authorize(AuthConstants.TrustedMemberPolicyName)]
     [HttpPost(ApiEndpoints.V1.Ingredients.Create)]
     public async Task<IActionResult> Create([FromBody] CreateIngredientRequest request, CancellationToken token)
     {
@@ -50,6 +50,7 @@ public class IngredientsController : ControllerBase
         return CreatedAtAction(nameof(Get), new { id = response.Id }, response);
     }
 
+    [Authorize(AuthConstants.TrustedMemberPolicyName)]
     [HttpPut(ApiEndpoints.V1.Ingredients.Update)]
     public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateIngredientRequest request, CancellationToken token)
     {
@@ -64,6 +65,7 @@ public class IngredientsController : ControllerBase
         return Ok(response);
     }
 
+    [Authorize(AuthConstants.AdminUserPolicyName)]
     [HttpDelete(ApiEndpoints.V1.Ingredients.Delete)]
     public async Task<IActionResult> Delete([FromRoute] Guid id, CancellationToken token)
     {

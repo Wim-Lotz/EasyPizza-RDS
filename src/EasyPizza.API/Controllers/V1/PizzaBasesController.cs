@@ -1,17 +1,14 @@
-﻿using EasyPizza.Contracts.Requests.V1;
+﻿namespace EasyPizza.Api.Controllers.V1;
 
-namespace EasyPizza.Api.Controllers.V1;
-
+[Authorize]
 [ApiController]
 public class PizzaBasesController : ControllerBase
 {
     private readonly IMediator _mediator;
-    private readonly ILogger<PizzaBasesController> _logger;
 
-    public PizzaBasesController(IMediator mediator, ILogger<PizzaBasesController> logger)
+    public PizzaBasesController(IMediator mediator)
     {
         _mediator = mediator;
-        _logger = logger;
     }
 
     [HttpGet(ApiEndpoints.V1.PizzaBases.GetAll)]
@@ -34,6 +31,7 @@ public class PizzaBasesController : ControllerBase
         return Ok(response);
     }
     
+    [Authorize(AuthConstants.TrustedMemberPolicyName)]
     [HttpPost(ApiEndpoints.V1.PizzaBases.Create)]
     public async Task<IActionResult> Create([FromBody] CreatePizzaBaseRequest request, CancellationToken cancellationToken)
     {
@@ -45,6 +43,7 @@ public class PizzaBasesController : ControllerBase
         return CreatedAtAction(nameof(Get), new { id = response.Id }, response);
     }
     
+    [Authorize(AuthConstants.TrustedMemberPolicyName)]
     [HttpPut(ApiEndpoints.V1.PizzaBases.Update)]
     public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdatePizzaBaseRequest request, CancellationToken cancellationToken)
     {
@@ -58,6 +57,7 @@ public class PizzaBasesController : ControllerBase
         return Ok(response);
     }
     
+    [Authorize(AuthConstants.AdminUserPolicyName)]
     [HttpDelete(ApiEndpoints.V1.PizzaBases.Delete)]
     public async Task<IActionResult> Delete([FromRoute] Guid id, CancellationToken cancellationToken)
     {
