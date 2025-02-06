@@ -1,11 +1,15 @@
 using System.Text;
 
 using EasyPizza.Api;
+using EasyPizza.Api.Swagger;
 using EasyPizza.Application;
 using EasyPizza.Infrastructure;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
@@ -54,15 +58,15 @@ builder.Services.AddOutputCache(x =>
         .Tag("ingredients"));
 });
 
-builder.Services.AddControllers();
-
 builder.Services.AddControllers().AddJsonOptions(x =>
     x.JsonSerializerOptions.ReferenceHandler = null);
 
 builder.Services.AddHealthChecks().AddDbContextCheck<EasyPizzaDbContext>();
 
-builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices();
